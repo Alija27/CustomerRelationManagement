@@ -1,56 +1,66 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+<body class="font-sans antialiased ">
+    <div class="h-screen">
+        <div class="grid p-20 bg-indigo-600 border-2 divide-x-2 divide-indigo-600 divide-dashed md:grid-cols-2 border-slate-700">
+            <div class="flex items-center justify-center w-full bg-white border-shadow-md">
+               <div class="w-full">
+                        <h1 class="text-2xl font-bold text-center">Welcome Back</h1>
+                        <p class="text-xs font-semibold text-center text-gray-800">Please enter your detail</p>
+                        <div class="flex justify-center w-8/12 mx-auto">
+                            <form class="w-full" method="POST" action="{{route('login')}}">
+                                @csrf
+                                
+                                <div class="mt-6">
+                                    <label class="block mb-2">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full p-2 border-gray-200 rounded-xl @error('email')
+                                    border-red-500
+                                 @enderror">
+                                 <span class="text-red-600">
+                                     @error('email')
+                                    {{$message}}
+                                @enderror
+                            </span>
+                                    
+                                </div>
+                                <div class="my-3">
+                                    <label class="block mb-2">Password</label>
+                                    <input type="password" id="password" name="password" class="w-full p-2 border-gray-200 rounded-xl{{--  @error('password') border-red-600 @enderror --}}">  
+                                    {{-- <span class="text-red-600">
+                                        @error('password')
+                                       {{$message}}
+                                   @enderror --}}
+                               </span>
+                                </div>
+                                <p class="my-2 text-sm font-bold text-right">Forgot Password</p>
+                                
+                                <div class="my-3">
+                                    <button class="w-full px-4 py-1 text-white bg-indigo-600 rounded-md shadow-md hover:shadow-lg hover:bg-indigo-800" type="submit">Login</button>
+                                </div>
+                            </form>
+                        </div>
+               </div>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+            <div class="hidden text-white shadow-md md:block">
+                <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1662370387~exp=1662370987~hmac=03f4a45ff04c3e0bda1c0ddf531c0baa689cfadecde5743fdfffa5e05f3f1e71" class="object-cover ">
             </div>
+        </div>
+    </div>
+</body>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+</html>
