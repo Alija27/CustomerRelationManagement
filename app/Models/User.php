@@ -29,6 +29,11 @@ class User extends Authenticatable
         'post',
     ];
 
+    public function Client()
+    {
+        return $this->hasMany(Client::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
