@@ -25,6 +25,8 @@ class UserSeeder extends Seeder
             "dob" => "2022/09/06",
             "bloodgroup" => "A+",
             "post" => "admin",
+            "entry_time" => "11:00",
+            "exit_time" => "14:00"
         ]);
     }
 }
