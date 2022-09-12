@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('bloodgroup');
             $table->string('dob');
             $table->string('post');
+            $table->string('entry_time');
+            $table->string('exit_time');
             $table->rememberToken();
             $table->timestamps();
         });
