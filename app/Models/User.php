@@ -27,6 +27,8 @@ class User extends Authenticatable
         'dob',
         'bloodgroup',
         'post',
+        'entry_time',
+        'exit_time'
     ];
 
     public function Client()
