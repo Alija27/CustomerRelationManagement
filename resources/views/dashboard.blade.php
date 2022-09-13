@@ -1,6 +1,12 @@
 @extends("layouts.app")
 @section("main")
 <div>
+        <span class="p-6 text-2xl">
+        @if(session("message"))
+        {{session("message")}}
+        @endif
+        </span>
+    
     <div class="justify-between my-6 lg:flex">
     <div class="mx-6 text-2xl font-bold ">Dashboard</div>
     <div class="flex mx-6 mt-6 lg:mt-0">
@@ -53,6 +59,11 @@
 <div id="ri" class="fixed top-0 bottom-0 left-0 right-0 hidden bg-black bg-opacity-10 backdrop-blur-lg">
     <div class="flex items-center justify-center">
         <div class="px-10 py-10 font-bold bg-white rounded-lg shadow-lg mt-[15%]">
+            <div class="flex justify-between">
+                
+                <span></span>
+                 <i onclick="cihide()" class="mb-6 cursor-pointer fa-solid fa-circle-xmark"></i>
+                 </div>
             <div class="font-bold text-center">
                 Remarks
             </div>
@@ -68,10 +79,13 @@
     </div>
 </div>
 <div id="cout" class="fixed top-0 bottom-0 left-0 right-0 hidden bg-black bg-opacity-10 backdrop-blur-lg">
-    
     <div class="flex items-center justify-center">
-        
         <div class="px-10 py-10 font-bold bg-white rounded-lg shadow-lg mt-[15%]">
+            <div class="flex justify-between">
+                
+           <span></span>
+            <i onclick="hide()" class="mb-6 cursor-pointer fa-solid fa-circle-xmark"></i>
+            </div>
             <div class="font-bold text-center">
                 Remarks
             </div>
@@ -100,6 +114,14 @@
     
     function out(){
         $("#cout").removeClass("hidden");
+    }
+
+    function cihide(){
+        $("#ri").addClass("hidden");
+    }
+
+    function hide(){
+        $("#cout").addClass("hidden");
     }
 </script>
 @endsection
