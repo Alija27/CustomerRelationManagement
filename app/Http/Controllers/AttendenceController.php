@@ -44,14 +44,14 @@ class AttendenceController extends Controller
         $attendence->date = Carbon::now()->format('y-m-d');
         // dd(Carbon::now()->format('H:i:s'));
         if (Attendence::where("date", Carbon::today()->format('y-m-d'))->exists()) {
-            return redirect()->back();
+            return redirect()->back()->with("message", "Already Clockin");
         }
 
         if (Auth::user()->entry_time < Carbon::now()->format('H:i:s')) {
 
 
             if ($request->reason == NULL) {
-                return redirect()->back();
+                return redirect()->back()->with("message", "Please enter reason to submit");
             }
 
             $attendence->late_entry = $request->reason;
@@ -59,7 +59,7 @@ class AttendenceController extends Controller
 
         $attendence->save();
 
-        return redirect()->back();
+        return redirect()->back()->with("message", "Clocked in sucessfully");
     }
 
     /**
