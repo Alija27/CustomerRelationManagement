@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Attendence;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +20,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    $attendence = Attendence::whereDate('date', Carbon::today())->where('user_id', auth()->user()->id)->first();
+    if ($attendence) {
+        return view('dashboard', compact('attendence'));
+    }
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
