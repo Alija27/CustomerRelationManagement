@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             "bloodgroup" => "A+",
             "post" => "admin",
             "entry_time" => "11:00",
-            "exit_time" => "14:00"
+            "exit_time" => "24:00"
         ]);
     }
 }
