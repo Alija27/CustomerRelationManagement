@@ -93,7 +93,38 @@ class AttendenceController extends Controller
      */
     public function update(Request $request, Attendence $attendence)
     {
-        //
+        /* $attendence->user_id = Auth::user()->id;
+        $attendence->clock_out = Carbon::now()->format('H:i:s');
+
+        if (Auth::user()->exit_time > Carbon::now()->format('H:i:s')) {
+
+
+            if ($request->reason == NULL) {
+                return redirect()->back();
+            }
+
+            $attendence->early_exit = $request->reason;
+        }
+        $attendence->save();
+        return redirect()->back(); */
+
+
+
+        $data['user_id'] = Auth::user()->id;
+        $data['clock_out'] = Carbon::now()->format('H:i:s');
+
+        if (Auth::user()->exit_time > Carbon::now()->format('H:i:s')) {
+
+
+            if ($request->reason == NULL) {
+
+                return redirect()->route('dashboard');
+            }
+
+            $data['early_exit'] = $request->reason;
+        }
+        $attendence->update($data);
+        return redirect()->route('dashboard');
     }
 
     /**
