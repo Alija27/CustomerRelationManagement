@@ -36,6 +36,10 @@ class User extends Authenticatable
         return $this->hasMany(Client::class);
     }
 
+    public function Leave()
+    {
+        return $this->hasMany(Leave::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
