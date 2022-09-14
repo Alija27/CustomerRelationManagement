@@ -40,4 +40,6 @@ Route::resource("airlines", \App\Http\Controllers\AirlineController::class);
 Route::delete('airline/delete', [\App\Http\Controllers\AirlineController::class, 'deleteAirline'])->name(('airlines.delete'));
 
 Route::resource("attendences", \App\Http\Controllers\AttendenceController::class);
+
+Route::resource("leaves", \App\Http\Controllers\LeaveController::class);
 require __DIR__ . '/auth.php';
