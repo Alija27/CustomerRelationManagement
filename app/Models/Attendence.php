@@ -16,5 +16,6 @@ class Attendence extends Model
         "late_entry",
         "early_exit",
         "date",
+        "total_time",
     ];
 }
