@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("late_entry")->nullable();
             $table->string("early_exit")->nullable();
             $table->date("date");
+            $table->string("total_time")->nullable();
             $table->timestamps();
         });
     }
