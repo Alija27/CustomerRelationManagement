@@ -113,6 +113,11 @@ class AttendenceController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['clock_out'] = Carbon::now()->format('H:i:s');
 
+        $a = Carbon::parse(Attendence::whereDate('date', Carbon::today())->where('user_id', auth()->user()->id)->pluck('clock_in')->first());
+        $b = Carbon::parse(Carbon::now()->format('H:i:s'));
+
+        $data['total_time'] = Carbon::parse($a->diffInSeconds($b))->format("H:i:s");
+
         if (Auth::user()->exit_time > Carbon::now()->format('H:i:s')) {
 
 
