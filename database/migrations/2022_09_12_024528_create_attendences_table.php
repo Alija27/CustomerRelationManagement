@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string("clock_out")->nullable();
             $table->string("late_entry")->nullable();
             $table->string("early_exit")->nullable();
-            $table->date("date");
             $table->string("total_time")->nullable();
+            $table->date("date");
+
             $table->timestamps();
         });
     }
