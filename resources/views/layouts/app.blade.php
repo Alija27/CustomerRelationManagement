@@ -29,10 +29,12 @@
                    </div>
                    <div class="px-2 py-2">
                        <ul class="pl-2 antialiased font-bold text-md ">
+                        <a href="{{route('dashboard')}}">
                            <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                              <i class="pr-2 fa-solid fa-gauge-high"></i>
                             Dashboard
                            </li>
+                        </a>
                            <a href="{{route('users.index')}}">
                             <li class="px-2 py-2  {{ request()->routeIs('users*') ?'bg-indigo-600 text-white':''}} rounded-md hover:bg-indigo-600 hover:text-white">
                                 <i class="pr-2 fa-solid fa-square"></i>
@@ -57,14 +59,18 @@
                                Airlines
                            </li>
                           </a> 
-                           <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                             <i class="pr-2 fa-brands fa-creative-commons-nd"></i>
-                               Form Layout
-                           </li>
+                          <a href="{{route('attendences.index')}}">
+                          <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                            <i class="pr-2 fa-brands fa-creative-commons-nd"></i>
+                              Attendence
+                          </li>
+                          </a>
+                          <a href="{{route('leaves.index')}}">
                            <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                              <i class="pr-2 fa-solid fa-address-book"></i>
-                               Form Editor
+                               Leave
                            </li>
+                          </a>
                            <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                              <a href="/table"><i class="pr-2 fa-solid fa-table"></i>
                                Table
