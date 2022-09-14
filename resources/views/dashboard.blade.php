@@ -12,7 +12,8 @@
     <div class="flex mx-6 mt-6 lg:mt-0">
         {{-- <form method="post" action={{route("attendences.store")}}> --}}
             @csrf
-        <button onclick="show()" class="p-2 px-6 mr-2 text-white bg-indigo-600 rounded hover:bg-green-600"><i class="fa-solid fa-stopwatch"></i><i class="m-1 fa-solid fa-arrow-right"></i>Clock In</button>
+           
+            <button onclick="show()"  class="p-2 px-6 mr-2 text-white bg-indigo-600 rounded hover:bg-green-600 "><i class="fa-solid fa-stopwatch"></i><i class="m-1 fa-solid fa-arrow-right"></i>Clock In</button>
         {{-- </form> --}}
         <button onclick="out()" class="p-2 px-6 ml-2 text-white bg-indigo-600 rounded hover:bg-red-600"><i class="fa-solid fa-arrow-left"><i class="m-1 fa-solid fa-stopwatch"></i></i>Clock Out</button>
        
