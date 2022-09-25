@@ -15,7 +15,8 @@ class Leave extends Model
         "date",
         "status",
         "image",
-
+        "remarks",
+        "letter",
 
     ];
 
