@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date("date");
             $table->string("image")->nullable();
             $table->string("status")->default("pending");
+            $table->string("remarks")->nullable();
+            $table->text("letter");
             $table->timestamps();
         });
     }
