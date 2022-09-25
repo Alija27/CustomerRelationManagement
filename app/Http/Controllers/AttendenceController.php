@@ -16,8 +16,8 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-        $attendence = Attendence::all();
-        return view("attendences.index", compact("attendence"));
+        $attendences = Attendence::where('user_id', auth()->user()->id)->get();
+        return view("attendences.index", compact("attendences"));
     }
 
     /**
@@ -43,7 +43,8 @@ class AttendenceController extends Controller
         //$attendence->clock_out = Carbon::now()->format('h-m-s');
         $attendence->date = Carbon::now()->format('y-m-d');
         // dd(Carbon::now()->format('H:i:s'));
-        if (Attendence::where("date", Carbon::today()->format('y-m-d'))->exists()) {
+
+        if (Attendence::where("user_id", auth()->user()->id)->where("date", Carbon::today()->format('y-m-d'))->exists()) {
             return redirect()->back()->with("message", "Already Clockin");
         }
 
