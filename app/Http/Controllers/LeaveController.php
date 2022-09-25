@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\LeaveRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LeaveController extends Controller
 {
@@ -18,16 +19,8 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === "admin") {
-            $leaves = Leave::all();
-            return view("leaves.index", compact("leaves"));
-        } else {
-
-
-            $userleave = Leave::where("user_id", Auth::user()->id);
-            $leaves = $userleave;
-            return view("leaves.index", compact("leaves"));
-        }
+        $leaves =  Leave::where("user_id", Auth::user()->id)->get();
+        return view("leaves.index", compact("leaves"));
     }
 
     /**
@@ -57,6 +50,7 @@ class LeaveController extends Controller
             $leave['image'] = $this->uploadImage($request->file('image'), $name, "leave");
         }
         // dd($leave);
+        $leave["letter"] = $request->letter;
         Leave::create($leave);
         return redirect()->route('leaves.index');
     }
@@ -100,14 +94,30 @@ class LeaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Leave $leave)
+    public function update(Request $request, $id)
     {
+
+        $leave = Leave::find($id);
         $data = $request->validate([
             "subject" => ["required"],
-            // "image" => ["required"],
-            "status" => ["required"]
+            "image" => ["nullable", "image", "mimes:png,jpg,jpeg"],
+            "letter" => ["required"],
+
         ]);
-        // dd($leave);
+
+        if ($request->hasFile('image')) {
+
+            $name = str_replace(' ', '', auth()->user()->name) . Str::random(20);
+            $data['image'] = $this->uploadImage($request->file('image'), $name, "leave");
+            dd($data['image']);
+            if ($leave->image) {
+
+                Storage::delete($leave->image);
+            }
+        }
+
+
+
         $leave->update($data);
         return redirect()->route('leaves.index');
     }
