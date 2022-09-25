@@ -18,4 +18,9 @@ class Attendence extends Model
         "date",
         "total_time",
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
