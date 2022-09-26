@@ -28,7 +28,7 @@ class User extends Authenticatable
         'bloodgroup',
         'post',
         'entry_time',
-        'exit_time'
+        'exit_time',
     ];
 
     public function Client()
@@ -40,6 +40,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Leave::class);
     }
+
+    public function Attendence()
+    {
+        return $this->hasMany(Attendence::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
