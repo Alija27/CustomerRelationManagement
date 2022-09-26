@@ -26,7 +26,24 @@ class UserSeeder extends Seeder
             "bloodgroup" => "A+",
             "post" => "admin",
             "entry_time" => "11:00",
-            "exit_time" => "24:00"
+            "exit_time" => "24:00",
+
+
+        ]);
+
+        User::create([
+            "name" => "Admin",
+            "email" => "user@user.com",
+            "password" => bcrypt("password"),
+            "role" => "user",
+            "address" => "Nepal",
+            "phonenumber" => "9812919812",
+            "dob" => "2022/09/06",
+            "bloodgroup" => "A+",
+            "post" => "user",
+            "entry_time" => "11:00",
+            "exit_time" => "24:00",
+
         ]);
     }
 }
