@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,8 @@ class UserController extends Controller
             "post" => ["required"],
             "dob" => ["required"],
             "bloodgroup" => ["required"],
+            "entry_time" => ["required"],
+            "exit_time" => ["required"],
         ]);
         User::create($user);
         return redirect()->route('users.index')->with("message", "User Created Sucessfully");
@@ -114,5 +117,12 @@ class UserController extends Controller
         $user = User::find($request->user_id);
         $user->delete();
         return redirect()->back();
+    }
+
+    public function viewTask($id)
+    {
+        $user = User::find($id);
+        $task = Task::where("user_id", $user->id)->get();
+        return view("users.task", compact("task"));
     }
 }
