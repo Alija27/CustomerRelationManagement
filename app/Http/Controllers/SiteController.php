@@ -21,13 +21,33 @@ class SiteController extends Controller
         return view('dashboard', compact("attendences", 'attendence'));
     }
 
+
     public function birthday()
     {
-        $userbirthday = User::whereDate("dob", Carbon::now()->format('y-m-d'))->get();
+        $now = now();
+        // return $now ?? "not available";
+        $sorted = User::whereMonth('dob', $now->month)->whereDay('dob', '>=', $now->day)->orderByRaw('DAYOFYEAR(dob)')->get();
+        foreach ($sorted as $user) {
+            $today = Carbon::today();
+            $dob = Carbon::parse($user->dob)->year(now()->format('y'))->format('y-m-d');
+            $remainingday = $today->diffInDays(Carbon::parse($dob));
+            $user->remaining = $remainingday;
+        }
+        // $remainingday = Carbon::parse(User::whereMonth('dob', $now->month)->whereDay('dob', '>=', $now->day)->orderBy('dob', 'ASC')->pluck('dob')->get());
+        // $day = $now->diffInDays($remainingday);
 
 
+        // $aftertoday = User::whereMonth('dob', '>=', $now->month)->whereDay('dob', '>=', $now->day)->orderByRaw('DAYOFYEAR(dob)')->get();
+        // $beforetoday = User::whereMonth('dob', '<', $now->month)->whereDay('dob', '<', $now->day)->orderByRaw('DAYOFYEAR(dob)')->get();
+        // $sorted =  ($aftertoday->merge($beforetoday));
+        // foreach ($sorted as $user) {
+        //     $today = Carbon::today();
+        //     $dob = Carbon::parse($user->dob)->year(now()->format('y'))->format('y-m-d');
+        //     $remainingday = $today->diffInDays(Carbon::parse($dob));
+        //     $user->remaining = $remainingday;
+        // }
 
-
-        return view("users.birthday", compact("userbirthday"));
+        // return $aftertoday;
+        return view("users.birthday", compact('sorted'));
     }
 }
