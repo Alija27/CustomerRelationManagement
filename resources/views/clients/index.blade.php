@@ -57,6 +57,10 @@
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
                         Added_by
                     </th>
+
+                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
+                        Date of birth
+                    </th>
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
                         Task
                     </th>
@@ -84,7 +88,10 @@
                             {{ $client->user->name }}
                         </td>
                         <td class="text-sm font-medium text-gray-900 whitespace-nowrap">
-                            <a href="{{ route('tasks.create') }}"> <button
+                            {{ $client->dob }}
+                        </td>
+                        <td class="text-sm font-medium text-gray-900 whitespace-nowrap">
+                            <a href="{{ route('tasks.assignTask', $client->id) }}"> <button
                                     class="p-2 text-white bg-green-500 rounded-lg">Assign</button> </a>
                         </td>
                         <td class="text-sm font-medium whitespace-nowrap">
@@ -94,9 +101,7 @@
                             <span onclick="show({{ $client->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('clients.show', $client->id) }}"><span
-                                    class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
-                                        class="fa-solid fa-eye"></i></span></a>
+
                         </td>
 
                     </tr>
