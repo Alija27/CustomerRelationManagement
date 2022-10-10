@@ -44,6 +44,7 @@ class ClientController extends Controller
             "email" => ["required"],
             "address" => ["required"],
             "phonenumber" => ["required"],
+            "dob" => ["required"],
 
         ]);
         $client['user_id'] = Auth::user()->id;
@@ -87,6 +88,7 @@ class ClientController extends Controller
             "email" => ["required"],
             "address" => ["required"],
             "phonenumber" => ["required"],
+            "dob" => ["required"],
         ]);
         $client->update($data);
         return redirect()->route('clients.index')->with("message", "Client Updated Sucessfully");
