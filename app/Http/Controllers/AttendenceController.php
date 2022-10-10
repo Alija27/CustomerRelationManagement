@@ -17,6 +17,7 @@ class AttendenceController extends Controller
     public function index()
     {
         $attendences = Attendence::where('user_id', auth()->user()->id)->get();
+
         return view("attendences.index", compact("attendences"));
     }
 
@@ -37,6 +38,9 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
+        toastr()->success('Data has been saved successfully!');
+        return back();
+
         $attendence = new Attendence;
         $attendence->user_id = Auth::user()->id;
         $attendence->clock_in = Carbon::now()->format('H:i:s');
