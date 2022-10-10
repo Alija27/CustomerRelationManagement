@@ -13,11 +13,17 @@ class Client extends Model
         "address",
         "phonenumber",
         "email",
-        "user_id"
+        "user_id",
+        "dob",
     ];
 
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Ticket()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }
