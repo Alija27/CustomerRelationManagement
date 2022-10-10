@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("phonenumber");
             $table->string("email");
             $table->foreignId("user_id")->constrained();
+            $table->string("dob");
             $table->timestamps();
         });
     }
