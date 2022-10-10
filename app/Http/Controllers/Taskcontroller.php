@@ -108,8 +108,12 @@ class Taskcontroller extends Controller
         //
     }
 
-    public function deleteTask()
+    public function deleteTask(Request $request)
     {
+        $task = Task::find($request->tasks_id);
+        $task->delete();
+
+        return redirect()->back();
     }
 
     public function myTask()
@@ -140,5 +144,14 @@ class Taskcontroller extends Controller
         $task->status = "completed";
         $task->save();
         return redirect()->back()->with("message", "Status updated sucessfully");
+    }
+
+    public function assignTask($id)
+    {
+        $users = User::all();
+        $departments = Department::all();
+        $purposes = Purpose::all();
+        $client = Client::findOrFail($id);
+        return view("tasks.create", compact("users", "client", "departments", "purposes"));
     }
 }
