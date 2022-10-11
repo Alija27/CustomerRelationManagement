@@ -2,10 +2,10 @@
 @section('main')
     <div class="w-full bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Department</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Airline</span>
             <a href="{{ route('departments.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    <- Go Back </button>
+                    <i class="mr-2 fa-solid fa-arrow-left"></i> Go Back </button>
             </a>
         </div>
         <form class="w-11/12 p-6 m-6 overflow-auto bg-white rounded-md " method="POST" action={{ route('airlines.store') }}>
