@@ -2,7 +2,7 @@
 @section('main')
     <div class="w-full bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Purpose</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Task</span>
             <a href="{{ route('tasks.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
                     <- Go Back </button>
@@ -24,11 +24,11 @@
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Client</label>
                 <select class="w-full border border-gray-200 " name="client_id" id="client_id">
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">
-                            {{ $client->name }}
-                        </option>
-                    @endforeach
+
+                    <option value="{{ $client->id }}" selected>
+                        {{ $client->name }}
+                    </option>
+
                 </select>
             </div>
             <div class="mb-6">
