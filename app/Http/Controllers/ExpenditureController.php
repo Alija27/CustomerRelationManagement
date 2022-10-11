@@ -44,7 +44,7 @@ class ExpenditureController extends Controller
             "date" => ["required"]
         ]);
         Expenditure::create($expenditure);
-        return redirect()->route("incomes.index")->with("message", "Income created sucessdully");
+        return redirect()->route("expenditures.index")->with("message", "Expenditure created sucessdully");
     }
 
     /**
@@ -55,7 +55,7 @@ class ExpenditureController extends Controller
      */
     public function show(Expenditure $expenditure)
     {
-        return view("incomes.show", compact("income"));
+        return view("expenditures.show", compact("expenditure"));
     }
 
     /**
@@ -66,7 +66,7 @@ class ExpenditureController extends Controller
      */
     public function edit(Expenditure $expenditure)
     {
-        return view("incomes.edit", compact("income"));
+        return view("expenditure.edit", compact("expenditure"));
     }
 
     /**
@@ -85,7 +85,7 @@ class ExpenditureController extends Controller
             "date" => ["required"]
         ]);
         $expenditure->update($data);
-        return redirect()->route("expenditures.index")->with("message", "Income created sucessdully");
+        return redirect()->route("expenditures.index")->with("message", "Expenditure created sucessdully");
     }
 
     /**
