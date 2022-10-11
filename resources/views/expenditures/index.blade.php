@@ -34,7 +34,7 @@
         <div class="flex justify-between mb-6 border-b border-gray-200">
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Expenditures</span>
 
-            <a href="{{ route('incomes.create') }}">
+            <a href="{{ route('expenditures.create') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
                     <i class="fa-solid fa-plus"></i> Add New
                 </button>
@@ -71,28 +71,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($incomes as $income)
+                @foreach ($expenditures as $expenditure)
                     <tr class="border-b">
                         <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
-                            {{ $income->particulars }}
+                            {{ $expenditure->particulars }}
                         </td>
                         <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
-                            {{ $income->amount }}
+                            {{ $expenditure->amount }}
                         </td>
                         <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
-                            {{ $income->remarks }}
+                            {{ $expenditure->remarks }}
                         </td>
                         <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
-                            {{ $income->date }}
+                            {{ $expenditure->date }}
                         </td>
                         <td class="text-sm font-medium border border-gray-200 whitespace-nowrap">
-                            <a href="{{ route('incomes.edit', $income) }}"> <span
+                            <a href="{{ route('expenditures.edit', $expenditure) }}"> <span
                                     class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
                                         class="fa-solid fa-pen-to-square"></i> </span></a>
-                            <span onclick="show({{ $income->id }})"
+                            <span onclick="show({{ $expenditure->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('incomes.show', $income->id) }}"><span
+                            <a href="{{ route('expenditures.show', $expenditure->id) }}"><span
                                     class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
                                         class="fa-solid fa-eye"></i></span></a>
 
