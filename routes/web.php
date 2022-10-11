@@ -70,5 +70,7 @@ Route::get("ticket/today", [\App\Http\Controllers\TicketController::class, 'inde
 Route::resource("incomes", \App\Http\Controllers\IncomeController::class);
 Route::get("income/total", [\App\Http\Controllers\IncomeController::class, 'calculateIncome'])->name("income.total");
 
+Route::resource("expenditures", \App\Http\Controllers\ExpenditureController::class);
+
 
 require __DIR__ . '/auth.php';
