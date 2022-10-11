@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("amount");
             $table->string("remarks")->nullable();
             $table->date("date");
+
             $table->timestamps();
         });
     }
