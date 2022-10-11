@@ -5,7 +5,7 @@
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Leave</span>
             <a href="{{ route('leaves.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    <- Go Back </button>
+                    <i class="mr-2 fa-solid fa-arrow-left"></i> Go Back </button>
             </a>
 
         </div>
