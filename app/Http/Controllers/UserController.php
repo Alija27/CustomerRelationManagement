@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->validate([
+        $data = $request->validate([
             "name" => ["required"],
             "email" => ["required"],
             "password" => ["required"],
@@ -49,8 +49,12 @@ class UserController extends Controller
             "bloodgroup" => ["required"],
             "entry_time" => ["required"],
             "exit_time" => ["required"],
-        ]);
-        User::create($user);
+        ], ["name.required" => "Please enter your name"]);
+        $user = User::create($data);
+        if ($user) {
+            toastr()->success('Data has been saved successfully!');
+        }
+
         return redirect()->route('users.index')->with("message", "User Created Sucessfully");
     }
 
@@ -95,6 +99,9 @@ class UserController extends Controller
             "post" => ["required"],
             "dob" => ["required"],
             "bloodgroup" => ["required"],
+            "entry_time" => ["required"],
+            "exit_time" => ["required"],
+
         ]);
 
         $user->update($data);
