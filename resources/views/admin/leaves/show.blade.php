@@ -4,6 +4,11 @@
         <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
             <div class="flex justify-between border-b border-gray-200">
                 <span class="mx-4 my-4 text-2xl font-bold">Leave</span>
+                <a href="{{ route('admin.leaves') }}">
+                    <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
+                        <i class="mr-2 fa-solid fa-arrow-left"></i> GoBack
+                    </button>
+                </a>
             </div>
             <div class="relative bg-black">
                 <div class="absolute flex items-center justify-center w-full h-full text-white">
