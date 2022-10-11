@@ -32,14 +32,8 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">tasks</span>
-            @if (auth()->user()->role === 'admin')
-                <a href="{{ route('tasks.create') }}">
-                    <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                        Add New
-                    </button>
-                </a>
-            @endif
+            <span class="m-1 mx-4 my-4 text-2xl font-bold"> All Tasks</span>
+
         </div>
         <table class="max-w-full mx-5 my-5 display" id="myTable">
             <thead class="border-b">
