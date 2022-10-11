@@ -65,13 +65,10 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-
-        $time = Carbon::now()->format("H:i");
-        dd($time);
         $ticket = $request->validate([
             "client_id" => ["required"],
             "date" => ["required", "after:yesterday"],
-            "time" => ["required", "date_format:H:i|after:$time"],
+            "time" => ["required"],
             "ticket_no" => ["required"],
             "airline_type" => ["required"],
             "airline_id" => ["required"],
