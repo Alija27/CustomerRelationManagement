@@ -20,7 +20,7 @@
 
     {{-- @include('layouts.navigation') --}}
     <div class="flex">
-        <nav class="fixed hidden h-screen bg-white shadow-lg hover:overflow-scroll lg:w-2/12 lg:block ">
+        <nav class="fixed hidden h-screen bg-white shadow-lg hover:overflow-y-scroll main-sidebar lg:w-2/12 lg:block ">
             <div class="p-6 mx-6">
                 <ul class="text-xl antialiased font-bold text-blue-500">
                     <li><i class="pr-2 fa-solid fa-user"></i>
@@ -75,6 +75,26 @@
                             My attendence
                         </li>
                     </a>
+
+                    <li onclick="birthdayToggle()"
+                        class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <i class="pr-2 fa-solid fa-cake-candles"></i>
+                        Birthday
+                    </li>
+
+                    <a href="{{ route('birthday.users') }}" class="hidden birthday">
+                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                            <i class="pr-2 fa-solid fa-gauge-high"></i>
+                            User Birthday
+                        </li>
+                    </a>
+                    <a href="{{ route('birthday.clients') }}" class="hidden birthday">
+                        <li
+                            class="px-2 py-2  {{ request()->routeIs('users*') ? 'bg-indigo-600 text-white' : '' }} rounded-md hover:bg-indigo-600 hover:text-white">
+                            <i class="pr-2 fa-solid fa-users"></i>
+                            Client Birthday
+                        </li>
+                    </a>
                     <a href="{{ route('admin.leaves') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                             <i class="pr-2 fa-solid fa-address-book"></i>
@@ -124,6 +144,12 @@
     </div>
     </div>
     @yield('js')
+    <script>
+        function birthdayToggle() {
+
+            $(".birthday").toggleClass("hidden");
+        }
+    </script>
 </body>
 
 </html>
