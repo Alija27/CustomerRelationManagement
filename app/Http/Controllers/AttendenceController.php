@@ -38,8 +38,8 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        toastr()->success('Data has been saved successfully!');
-        return back();
+        /* toastr()->success('Data has been saved successfully!');
+        return back(); */
 
         $attendence = new Attendence;
         $attendence->user_id = Auth::user()->id;
