@@ -32,55 +32,55 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">Users</span>
-            @if (auth()->user()->role === 'admin')
-                <a href="{{ route('users.create') }}">
-                    <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                        Add New
-                    </button>
-                </a>
-            @endif
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">User Birthday</span>
+
         </div>
-        <table class="max-w-full mx-5 my-5 display" id="myTable">
+        <table class="w-[96%] mx-5 my-5 display">
             <thead class="border-b">
-                <tr class="bg-indigo-600 ">
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                <tr class="px-8 bg-indigo-600">
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Name
                     </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Email
                     </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Address
                     </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Phonenumber
                     </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Date of Birth
+                    </th>
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
+                        Remaining Days
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($userbirthday as $user)
-                    <tr class="border-b">
-                        <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
+                @foreach ($sorted as $user)
+                    <tr
+                        class="border-b  @if (Carbon\Carbon::create($user->dob)->format('mm/dd') == Carbon\Carbon::now()->format('mm/dd')) bg-green-500 font-bold text-white @else text-gray-900 font-medium @endif">
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->name }}
                         </td>
-                        <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->email }}
                         </td>
-                        <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->address }}
                         </td>
-                        <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->phonenumber }}
                         </td>
-                        <td class="text-sm font-medium border border-gray-200 whitespace-nowrap">
-                            {{ $user->dob }}
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap ">
+                            {{ \Carbon\Carbon::parse($user->dob)->format('M-d') }}
 
                         </td>
-
+                        <td class="text-sm border border-gray-200 whitespace-nowrap">
+                            {{ $user->remaining === 0 ? 'Today' : ($user->remaining == 1 ? $user->remaining . ' day' : $user->remaining . ' days') }}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
