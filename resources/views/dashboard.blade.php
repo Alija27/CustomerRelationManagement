@@ -25,13 +25,13 @@
 
                     </div>
                 </div>
-                <div class="flex flex-wrap gap-6 lg:gap-4 lg:flex-nowrap mx-6{{-- justify-center gap-6 m-6 mt-6 lg:flex-nowrap sm:flex-row lg:w-8/12 lg:justify-start lg:gap-4 --}}">
+                <div class="grid grid-cols-1 flex-wrap gap-6 lg:gap-4 md:grid-cols-2 lg:grid-cols-3{{-- justify-center gap-6 m-6 mt-6 lg:flex-nowrap sm:flex-row lg:w-8/12 lg:justify-start lg:gap-4 --}}">
                     {{-- <div class="text-2xl text-blue-600">
                         Welcome to dashboard
                     </div> --}}
 
 
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-5/12 lg:w-1/4 ">
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-eye"></i></span>
                         <div class="mx-4 mt-4 ">
@@ -39,28 +39,69 @@
                             <div class="text-sm text-gray-600">{{ $attendences }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-5/12 lg:w-1/4 ">
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-eye"></i></span>
                         <div class="mx-4 mt-4 ">
                             <div class="antialiased font-bold text-gray-600 md:text-sm">Total Leave</div>
-                            <div class="text-sm text-gray-600">16</div>
+                            <div class="text-sm text-gray-600">{{ $leaves }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-5/12 lg:w-1/4 ">
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-eye"></i></span>
                         <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Profile_Views</div>
-                            <div class="text-sm text-gray-600">16</div>
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">This month attednednce</div>
+                            <div class="text-sm text-gray-600">{{ $this_month_attendence }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-5/12 lg:w-1/4 ">
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-eye"></i></span>
                         <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">View</div>
-                            <div class="text-sm text-gray-600">16</div>
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Upcomming Client birthdays</div>
+                            <div class="text-sm text-gray-600">{{ $client_birthday }}</div>
+                        </div>
+                    </div>
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                class="fa-solid fa-eye"></i></span>
+                        <div class="mx-4 mt-4 ">
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Upcomming User birthdays</div>
+                            <div class="text-sm text-gray-600">{{ $user_birthday }}</div>
+                        </div>
+                    </div>
+
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                class="fa-solid fa-eye"></i></span>
+                        <div class="mx-4 mt-4 ">
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Ticket</div>
+                            <div class="text-sm text-gray-600">{{ $today_ticket }}</div>
+                        </div>
+                    </div>
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                class="fa-solid fa-eye"></i></span>
+                        <div class="mx-4 mt-4 ">
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Upcomming Ticket</div>
+                            <div class="text-sm text-gray-600">{{ $upcomming_ticket }}</div>
+                        </div>
+                    </div>
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                class="fa-solid fa-eye"></i></span>
+                        <div class="mx-4 mt-4 ">
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Income</div>
+                            <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
+                        </div>
+                    </div>
+                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                class="fa-solid fa-eye"></i></span>
+                        <div class="mx-4 mt-4 ">
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Expenditure</div>
+                            <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
                         </div>
                     </div>
                 </div>
