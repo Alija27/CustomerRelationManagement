@@ -32,7 +32,7 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">leaves</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">Leaves</span>
 
             <a href="{{ route('leaves.create') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
