@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Leave;
+use App\Models\Client;
 use App\Models\Attendence;
 use Illuminate\Http\Request;
 
@@ -49,5 +50,18 @@ class SiteController extends Controller
 
         // return $aftertoday;
         return view("users.birthday", compact('sorted'));
+    }
+
+    public function clientbirthday()
+    {
+        $now = now();
+        $sorted = Client::whereMonth('dob', $now->month)->whereDay('dob', '>=', $now->day)->orderByRaw('DAYOFYEAR(dob)')->get();
+        foreach ($sorted as $user) {
+            $today = Carbon::today();
+            $dob = Carbon::parse($user->dob)->year(now()->format('y'))->format('y-m-d');
+            $remainingday = $today->diffInDays(Carbon::parse($dob));
+            $user->remaining = $remainingday;
+        }
+        return view("clients.birthday", compact('sorted'));
     }
 }
