@@ -52,12 +52,23 @@ Route::resource("purposes", \App\Http\Controllers\PurposeController::class);
 Route::delete('purpose/delete', [\App\Http\Controllers\PurposeController::class, 'deletePurpose'])->name(('purposes.delete'));
 
 Route::resource("tasks", \App\Http\Controllers\TaskController::class);
+Route::get("task/assignTask/{id}", [\App\Http\Controllers\TaskController::class, 'assignTask'])->name(('tasks.assignTask'));
 Route::delete('task/delete', [\App\Http\Controllers\TaskController::class, 'deleteTask'])->name(('tasks.delete'));
 Route::get('task/mytask', [\App\Http\Controllers\TaskController::class, 'myTask'])->name(('task.mytask'));
 Route::post('task/pending/{id}', [\App\Http\Controllers\TaskController::class, 'pending'])->name(('task.pending'));
 Route::post('task/processing/{id}', [\App\Http\Controllers\TaskController::class, 'processing'])->name(('task.processing'));
 Route::post('task/complete/{id}', [\App\Http\Controllers\TaskController::class, 'complete'])->name(('task.complete'));
 
-Route::get("birthdays", [\App\Http\Controllers\SiteController::class, 'birthday'])->name("birthdays");
+Route::get("birthday/users", [\App\Http\Controllers\SiteController::class, 'birthday'])->name("birthday.users");
+Route::get("birthday/clients", [\App\Http\Controllers\SiteController::class, 'clientbirthday'])->name("birthday.clients");
+
+Route::resource("tickets", \App\Http\Controllers\TicketController::class);
+Route::get("ticket/domestic", [\App\Http\Controllers\TicketController::class, 'index'])->name("ticket.domestic");
+Route::get("ticket/international", [\App\Http\Controllers\TicketController::class, 'index'])->name("ticket.international");
+Route::get("ticket/today", [\App\Http\Controllers\TicketController::class, 'index'])->name("ticket.today");
+
+Route::resource("incomes", \App\Http\Controllers\IncomeController::class);
+Route::get("income/total", [\App\Http\Controllers\IncomeController::class, 'calculateIncome'])->name("income.total");
+
 
 require __DIR__ . '/auth.php';
