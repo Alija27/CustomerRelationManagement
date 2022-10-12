@@ -105,7 +105,7 @@
                     </div>
                     <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
-                                class="fa-solid fa-money-bill"></i></span>
+                                class="fa-solid fa-coins"></i></span>
                         <div class="mx-4 mt-4 ">
                             <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Expenditure</div>
                             <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
