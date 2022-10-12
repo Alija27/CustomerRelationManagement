@@ -32,7 +32,8 @@
             <div class="px-2 ">
                 <ul class="pl-2 antialiased font-bold text-md ">
                     <a href="{{ route('dashboard') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <li
+                            class="{{ request()->routeIs('dashboard') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                             <i class="pr-2 fa-solid fa-gauge-high"></i>
                             Dashboard
                         </li>
@@ -52,7 +53,8 @@
                         </li>
                     </a>
                     <a href="{{ route('departments.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <li
+                            class="px-2 py-2 my-2 rounded-md {{ request()->routeIs('departments*') ? 'bg-indigo-600 text-white' : '' }} hover:bg-indigo-600 hover:text-white">
                             <i class="pr-2 fa-solid fa-building"></i>
                             Departments
                         </li>
@@ -75,26 +77,32 @@
                             My attendence
                         </li>
                     </a>
+                    <div>
 
-                    <li onclick="birthdayToggle()"
-                        class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                        <i class="pr-2 fa-solid fa-cake-candles"></i>
-                        Birthday
-                    </li>
+                        <li onclick="birthdayToggle()"
+                            class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white                       {{ Route::is('birthday.users') || Route::is('birthday.clients') ? 'bg-indigo-600 text-white' : '' }}">
+                            <i class="pr-2 fa-solid fa-cake-candles"></i>
+                            Birthday <i class="ml-16 fa-solid fa-caret-down"></i>
+                        </li>
 
-                    <a href="{{ route('birthday.users') }}" class="hidden birthday">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-gauge-high"></i>
-                            User Birthday
-                        </li>
-                    </a>
-                    <a href="{{ route('birthday.clients') }}" class="hidden birthday">
-                        <li
-                            class="px-2 py-2  {{ request()->routeIs('users*') ? 'bg-indigo-600 text-white' : '' }} rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-users"></i>
-                            Client Birthday
-                        </li>
-                    </a>
+                        <a href="{{ route('birthday.users') }}">
+                            <li
+                                class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white {{ Route::is('birthday.users') || Route::is('birthday.users') ? ' bg-indigo-200 ' : 'hidden' }}
+                                birthday">
+                                <i class="pr-2 fa-solid fa-gauge-high"></i>
+                                User Birthday
+                            </li>
+                        </a>
+                        <a href="{{ route('birthday.clients') }}">
+                            <li
+                                class="px-2 py-2   rounded-md hover:bg-indigo-600 hover:text-white {{ Route::is('birthday.clients') || Route::is('birthday.clients') ? 'bg-indigo-200' : 'hidden' }}
+                                birthday">
+                                <i class="pr-2 fa-solid fa-users"></i>
+                                Client Birthday
+                            </li>
+                        </a>
+                    </div>
+
                     <a href="{{ route('admin.leaves') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                             <i class="pr-2 fa-solid fa-address-book"></i>
@@ -103,25 +111,25 @@
                     </a>
                     <a href="{{ route('leaves.index') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-address-book"></i>
+                            <i class="pr-2 fa-solid fa-envelope"></i>
                             My Leave
                         </li>
                     </a>
                     <a href="{{ route('purposes.index') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-address-book"></i>
+                            <i class="pr-2 fa-solid fa-bars"></i>
                             Purpose
                         </li>
                     </a>
                     <a href="{{ route('tasks.index') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-address-book"></i>
+                            <i class="pr-2 fa-solid fa-list-check"></i>
                             Tasks
                         </li>
                     </a>
                     <a href="{{ route('task.mytask') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-address-book"></i>
+                            <i class="pr-2 fa-solid fa-briefcase"></i>
                             My Task
                         </li>
                     </a>
