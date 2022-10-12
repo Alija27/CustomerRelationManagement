@@ -67,13 +67,13 @@
                     </a>
                     <a href="{{ route('admin.attendence') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-brands fa-creative-commons-nd"></i>
+                            <i class="pr-2 fa-regular fa-calendar-check"></i>
                             All Attendence
                         </li>
                     </a>
                     <a href="{{ route('attendences.index') }}">
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-brands fa-creative-commons-nd"></i>
+                            <i class="pr-2 fa-solid fa-clipboard-user"></i>
                             My attendence
                         </li>
                     </a>
@@ -131,6 +131,19 @@
                         <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
                             <i class="pr-2 fa-solid fa-briefcase"></i>
                             My Task
+                        </li>
+                    </a>
+                    <a href="{{ route('incomes.index') }}">
+                        <li
+                            class="{{ request()->routeIs('incomes*') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                            <i class="pr-2 fa-solid fa-money-check-dollar"></i>
+                            Incomes
+                        </li>
+                    </a>
+                    <a href="{{ route('expenditures.index') }}">
+                        <li
+                            class="{{ request()->routeIs('expenditures*') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                            <i class="pr-2 fa-solid fa-coins"></i>Expenditures
                         </li>
                     </a>
                     <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
