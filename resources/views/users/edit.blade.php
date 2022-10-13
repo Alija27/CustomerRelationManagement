@@ -41,6 +41,16 @@
                     id="phonenumber"value="{{ $user->phonenumber }}">
             </div>
             <div class="mb-6">
+                <label class="block font-bold text-gray-600 text-md">Status</label>
+                <input class="w-full border border-gray-200" type="text" name="status" id="status"
+                    value={{ $user->status }}>
+                <div class="text-red-700 ">
+                    @error('status')
+                        {{ $message }}
+                    @enderror
+                </div>
+            </div>
+            <div class="mb-6">
 
 
                 <label class="block font-bold text-gray-600 text-md">Role</label>
