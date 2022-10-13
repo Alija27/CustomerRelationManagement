@@ -18,13 +18,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->bcrypt();
             $table->string('role');
             $table->string('address');
             $table->string('phonenumber');
             $table->string('bloodgroup');
             $table->string('dob');
             $table->string('post');
+            $table->string('status')->default("active");
             $table->string('entry_time');
             $table->string('exit_time');
             $table->rememberToken();
