@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             "post" => "admin",
             "entry_time" => "11:00",
             "exit_time" => "24:00",
-
+            "status" => "active"
 
         ]);
 
@@ -43,6 +43,7 @@ class UserSeeder extends Seeder
             "post" => "user",
             "entry_time" => "11:00",
             "exit_time" => "24:00",
+            "status" => "active"
 
         ]);
     }
