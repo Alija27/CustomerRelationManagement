@@ -124,6 +124,18 @@
                 </div>
             </div>
             <div class="mb-6">
+                <label class="block font-bold text-gray-600 text-md">Confirmed Password</label>
+                <input class="w-full border border-gray-200 " type="password" name="password_confirmation"
+                    id="password_confirmation">
+                <div class="text-red-700 ">
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </div>
+
+            </div>
+
+            <div class="mb-6">
                 <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
             </div>
         </form>
