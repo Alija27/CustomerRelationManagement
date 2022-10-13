@@ -15,8 +15,6 @@
                     <div class="flex mx-6 mt-6 lg:mt-0">
                         {{-- <form method="post" action={{route("attendences.store")}}> --}}
                         @csrf
-
-
                         <button onclick="show()" @if (App\Models\Attendence::whereDate('date', Carbon\Carbon::today())->where('user_id', auth()->user()->id)->first()) disabled @endif
                             class="p-2 px-6 mr-2 text-white bg-green-600 rounded hover:bg-green-700 "><i
                                 class="fa-solid fa-stopwatch"></i><i class="m-1 fa-solid fa-arrow-right"></i>Clock In</button>
@@ -29,6 +27,7 @@
                                     class="m-1 fa-solid fa-envelope"></i>Ask
                                 Leave</button>
                         </a>
+
 
                     </div>
                 </div>
@@ -108,7 +107,7 @@
                                 class="fa-solid fa-coins"></i></span>
                         <div class="mx-4 mt-4 ">
                             <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Expenditure</div>
-                            <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
+                            <div class="text-sm text-gray-600">Rs {{ $today_expenditure }}</div>
                         </div>
                     </div>
                 </div>
@@ -133,6 +132,7 @@
                                         <div>{{ Carbon\Carbon::parse($user->dob)->format('M-d') }}</div>
                                         <div>{{ $user->phonenumber }}</div>
                                     </div>
+                                    <div>{{ $user->address }}</div>
                                 </div>
                             @endforeach
 
@@ -157,6 +157,7 @@
                                         <div>{{ Carbon\Carbon::parse($user->dob)->format('M-d') }}</div>
                                         <div>{{ $client->phonenumber }}</div>
                                     </div>
+                                    <div>{{ $client->address }}</div>
                                 </div>
                             @endforeach
                         </div>
