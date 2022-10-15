@@ -40,7 +40,7 @@ class DepartmentController extends Controller
             "title" => ["required"]
         ]);
         Department::create($department);
-        return redirect()->route("departments.index")->with("message", "Department Created Sucessfully");
+        return redirect()->route("departments.index")->with("success", "Department Created Sucessfully");
     }
 
     /**
@@ -78,7 +78,7 @@ class DepartmentController extends Controller
             "title" => ["required"]
         ]);
         $department->update($data);
-        return redirect()->route("departments.index")->with("message", "Department Created Sucessfully");
+        return redirect()->route("departments.index")->with("success", "Department Created Sucessfully");
     }
 
     /**
