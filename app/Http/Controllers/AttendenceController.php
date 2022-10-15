@@ -56,7 +56,7 @@ class AttendenceController extends Controller
 
 
             if ($request->reason == NULL) {
-                return redirect()->back()->with("message", "Please enter reason to submit");
+                return redirect()->back()->with("error", "Please enter reason to submit");
             }
 
             $attendence->late_entry = $request->reason;
@@ -64,7 +64,7 @@ class AttendenceController extends Controller
 
         $attendence->save();
 
-        return redirect()->back()->with("message", "Clocked in sucessfully");
+        return redirect()->back()->with("success", "Clocked in sucessfully");
     }
 
     /**
@@ -134,7 +134,7 @@ class AttendenceController extends Controller
             $data['early_exit'] = $request->reason;
         }
         $attendence->update($data);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with("success", "Clocked out successfully");
     }
 
     /**
