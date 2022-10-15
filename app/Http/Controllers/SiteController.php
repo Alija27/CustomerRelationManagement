@@ -46,7 +46,7 @@ class SiteController extends Controller
         }
 
 
-        return view('dashboard', compact("attendences", 'attendence', 'leaves', 'clients', 'this_month_attendence', 'client_birthday_total', 'user_birthday_total', 'today_ticket', 'upcomming_ticket', 'today_income', 'u_birthday', 'c_birthday'));
+        return view('dashboard', compact("attendences", 'attendence', 'leaves', 'clients', 'this_month_attendence', 'client_birthday_total', 'user_birthday_total', 'today_ticket', 'upcomming_ticket', 'today_income', 'u_birthday', 'c_birthday', 'today_expenditure'));
     }
 
 
