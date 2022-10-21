@@ -49,7 +49,7 @@ class AttendenceController extends Controller
         // dd(Carbon::now()->format('H:i:s'));
 
         if (Attendence::where("user_id", auth()->user()->id)->where("date", Carbon::today()->format('y-m-d'))->exists()) {
-            return redirect()->back()->with("message", "Already Clockin");
+            return redirect()->back()->with("success", "Already Clockin");
         }
 
         if (Auth::user()->entry_time < Carbon::now()->format('H:i:s')) {
@@ -127,7 +127,7 @@ class AttendenceController extends Controller
 
 
             if ($request->reason == NULL) {
-
+                // return "hello";
                 return redirect()->route('dashboard');
             }
 
