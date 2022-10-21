@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Expenditure;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class ExpenditureController extends Controller
     {
         $expenditures = Expenditure::all();
         $total = Expenditure::sum('amount');
-        return view("expenditures.index", compact("expenditures", "total"));
+        $today = Expenditure::where('date', Carbon::now())->sum('amount');
+        return view("expenditures.index", compact("expenditures", "total", "today"));
     }
 
     /**
@@ -44,7 +46,7 @@ class ExpenditureController extends Controller
             "date" => ["required"]
         ]);
         Expenditure::create($expenditure);
-        return redirect()->route("expenditures.index")->with("message", "Expenditure created sucessdully");
+        return redirect()->route("expenditures.index")->with("success", "Expenditure created sucessdully");
     }
 
     /**
@@ -85,7 +87,7 @@ class ExpenditureController extends Controller
             "date" => ["required"]
         ]);
         $expenditure->update($data);
-        return redirect()->route("expenditures.index")->with("message", "Expenditure created sucessdully");
+        return redirect()->route("expenditures.index")->with("success", "Expenditure created sucessdully");
     }
 
     /**
