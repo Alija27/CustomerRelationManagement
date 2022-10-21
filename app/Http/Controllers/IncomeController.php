@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Income;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class IncomeController extends Controller
     {
         $incomes = Income::all();
         $total = Income::sum('amount');
-        return view("incomes.index", compact("incomes", "total"));
+        $today = Income::whereDay('date', Carbon::now())->sum('amount');
+        $monthly = Income::whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->sum('amount');
+        return view("incomes.index", compact("incomes", "total", "today", "monthly"));
     }
 
     /**
@@ -44,7 +47,7 @@ class IncomeController extends Controller
             "date" => ["required"]
         ]);
         Income::create($income);
-        return redirect()->route("incomes.index")->with("message", "Income created sucessdully");
+        return redirect()->route("incomes.index")->with("success", "Income created sucessdully");
     }
 
     /**
@@ -85,7 +88,7 @@ class IncomeController extends Controller
             "date" => ["required"]
         ]);
         $income->update($data);
-        return redirect()->route("incomes.index")->with("message", "Income created sucessdully");
+        return redirect()->route("incomes.index")->with("success", "Income created sucessdully");
     }
 
     /**
