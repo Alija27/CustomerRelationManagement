@@ -41,15 +41,15 @@ class ClientController extends Controller
 
         $client = $request->validate([
             "name" => ["required"],
-            "email" => ["required"],
+            "email" => ["required", "email", "unique:clients"],
             "address" => ["required"],
-            "phonenumber" => ["required"],
-            "dob" => ["required"],
+            "phonenumber" => ["required", 'digits:10', 'numeric', "regex:/(\+977)?[9][6-9]\d{8}/"],
+            "dob" => ["required", "before:today"],
 
         ]);
         $client['user_id'] = Auth::user()->id;
         Client::create($client);
-        return redirect()->route('clients.index')->with("message", "Client Created Sucessfully");
+        return redirect()->route('clients.index')->with("success", "Client Created Sucessfully");
     }
 
     /**
@@ -71,7 +71,12 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view("clients.edit", compact("client"));
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+
+            return view("clients.edit", compact("client"));
+        }
     }
 
     /**
@@ -85,13 +90,13 @@ class ClientController extends Controller
     {
         $data = $request->validate([
             "name" => ["required"],
-            "email" => ["required"],
+            "email" => ["required", "email"],
             "address" => ["required"],
-            "phonenumber" => ["required"],
-            "dob" => ["required"],
+            "phonenumber" => ["required", 'digits:10', 'numeric', "regex:/(\+977)?[9][6-9]\d{8}/"],
+            "dob" => ["required", "before:today"],
         ]);
         $client->update($data);
-        return redirect()->route('clients.index')->with("message", "Client Updated Sucessfully");
+        return redirect()->route('clients.index')->with("success", "Client Updated Sucessfully");
     }
 
     /**
@@ -107,8 +112,12 @@ class ClientController extends Controller
 
     public function deleteClient(Request $request)
     {
-        $user = Client::find($request->client_id);
-        $user->delete();
-        return redirect()->back();
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+            $user = Client::find($request->client_id);
+            $user->delete();
+            return redirect()->back();
+        }
     }
 }
