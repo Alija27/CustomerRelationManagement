@@ -25,7 +25,11 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        return view("airlines.create");
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+            return view("airlines.create");
+        }
     }
 
     /**
@@ -41,7 +45,7 @@ class AirlineController extends Controller
             "type" => ["required"],
         ]);
         Airline::create($airline);
-        return redirect()->route("airlines.index")->with("message", "Airlines Created Sucessfully");
+        return redirect()->route("airlines.index")->with("success", "Airlines Created Sucessfully");
     }
 
     /**
@@ -52,7 +56,6 @@ class AirlineController extends Controller
      */
     public function show(Airline $airline)
     {
-        return view("airlines.show", compact("airline"));
     }
 
     /**
@@ -63,7 +66,11 @@ class AirlineController extends Controller
      */
     public function edit(Airline $airline)
     {
-        return view("airlines.edit", compact("airline"));
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+            return view("airlines.edit", compact("airline"));
+        }
     }
 
     /**
@@ -80,7 +87,7 @@ class AirlineController extends Controller
             "type" => ["required"],
         ]);
         $airline->update($data);
-        return redirect()->route("airlines.index")->with("message", "Airlines Updated Sucessfully");
+        return redirect()->route("airlines.index")->with("success", "Airlines Updated Sucessfully");
     }
 
     /**
@@ -95,8 +102,12 @@ class AirlineController extends Controller
     }
     public function deleteAirline(Request $request)
     {
-        $airline = Airline::find($request->airline_id);
-        $airline->delete();
-        return redirect()->back();
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+            $airline = Airline::find($request->airline_id);
+            $airline->delete();
+            return redirect()->back();
+        }
     }
 }
