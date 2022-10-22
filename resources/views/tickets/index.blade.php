@@ -32,7 +32,17 @@
     @endif
     <div class="w-full overflow-x-scroll bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold"> All Tickets</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">
+                @if (request()->routeIs('tickets.index'))
+                    All Tickets
+                @elseif (request()->routeIs('ticket.domestic'))
+                    Domestic Tickets
+                @elseif (request()->routeIs('ticket.international'))
+                    International Ticket
+                @elseif (request()->routeIs('ticket.today'))
+                    Today Tickets
+                @endif
+            </span>
             <a href="{{ route('tickets.create') }}">
                 <button class="p-2 m-1 text-white bg-indigo-600 rounded">Add New</button>
             </a>
@@ -134,9 +144,7 @@
                             <span onclick="show({{ $ticket->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('tickets.show', $ticket->id) }}"><span
-                                    class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
-                                        class="fa-solid fa-eye"></i></span></a>
+
 
 
 
