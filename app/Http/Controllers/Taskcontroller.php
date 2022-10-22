@@ -30,11 +30,15 @@ class Taskcontroller extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $clients = Client::all();
-        $departments = Department::all();
-        $purposes = Purpose::all();
-        return view("tasks.create", compact("users", "clients", "departments", "purposes"));
+        if (auth()->user()->role != 'user') {
+            return abort(403);
+        } else {
+            $users = User::all();
+            $clients = Client::all();
+            $departments = Department::all();
+            $purposes = Purpose::all();
+            return view("tasks.create", compact("users", "clients", "departments", "purposes"));
+        }
     }
 
     /**
@@ -53,7 +57,7 @@ class Taskcontroller extends Controller
             "remarks" => ["required"],
         ]);
         Task::create($task);
-        return redirect()->route("tasks.index")->with("message", "Task created sucessfully");
+        return redirect()->route("tasks.index")->with("success", "Task created sucessfully");
     }
 
     /**
@@ -75,7 +79,11 @@ class Taskcontroller extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $users = User::all();
+        $departments = Department::all();
+        $purposes = Purpose::all();
+
+        return view("tasks.edit", compact("task", "users", "departments", "purposes"));
     }
 
     /**
@@ -89,12 +97,15 @@ class Taskcontroller extends Controller
     {
 
         $data = $request->validate([
-            "status" => ["required"],
+            "status" => ["nullable"],
+            "department_id" => ["required"],
+            "purpose_id" => ["required"],
+            "remarks" => ["nullable"],
             "user_id" => ["required"],
 
         ]);
         $task->update($data);
-        return redirect()->back()->with("message", "Status updated successfully.");
+        return redirect()->route('tasks.index')->with("success", "Task updated successfully.");
     }
 
     /**
@@ -110,6 +121,7 @@ class Taskcontroller extends Controller
 
     public function deleteTask(Request $request)
     {
+
         $task = Task::find($request->tasks_id);
         $task->delete();
 
@@ -124,34 +136,41 @@ class Taskcontroller extends Controller
 
     public function pending($id)
     {
+
         $task = Task::find($id);
         $task->status = "pending";
         $task->save();
-        return redirect()->back()->with("message", "Status updated sucessfully");
+        return redirect()->back()->with("success", "Status updated sucessfully");
     }
 
     public function processing($id)
     {
+
         $task = Task::find($id);
         $task->status = "processing";
         $task->save();
-        return redirect()->back()->with("message", "Status updated sucessfully");
+        return redirect()->back()->with("success", "Status updated sucessfully");
     }
 
     public function complete($id)
     {
+
         $task = Task::find($id);
         $task->status = "completed";
         $task->save();
-        return redirect()->back()->with("message", "Status updated sucessfully");
+        return redirect()->back()->with("success", "Status updated sucessfully");
     }
 
     public function assignTask($id)
     {
+        // if (auth()->user()->role != 'user') {
+        //     return abort(403);
+        // } else {
         $users = User::all();
         $departments = Department::all();
         $purposes = Purpose::all();
-        $client = Client::findOrFail($id);
+        $client = Client::find($id);
         return view("tasks.create", compact("users", "client", "departments", "purposes"));
+        // }
     }
 }
