@@ -36,7 +36,7 @@
             @if (auth()->user()->role === 'admin')
                 <a href="{{ route('purposes.create') }}">
                     <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                        Add New
+                        <i class="mr-1 fa-solid fa-plus"></i> Add New
                     </button>
                 </a>
             @endif
