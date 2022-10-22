@@ -13,7 +13,8 @@
             @csrf
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Name</label>
-                <input class="w-full border border-gray-200 " type="text" name="name" id="name">
+                <input class="w-full border border-gray-200" value="{{ old('name') }}" type="text" name="name"
+                    id="name">
                 <div class="text-red-700 ">
                     @error('name')
                         {{ $message }}
@@ -23,7 +24,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Email</label>
-                <input class="w-full border border-gray-200" type="text" name="email" id="email">
+                <input class="w-full border border-gray-200" value="{{ old('email') }}" type="text" name="email"
+                    id="email">
                 <div class="text-red-700 ">
                     @error('email')
                         {{ $message }}
@@ -32,7 +34,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Address</label>
-                <input class="w-full border border-gray-200" type="text" name="address" id="address">
+                <input class="w-full border border-gray-200" value="{{ old('address') }}" type="text" name="address"
+                    id="address">
                 <div class="text-red-700 ">
                     @error('address')
                         {{ $message }}
@@ -41,7 +44,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Phonenumber</label>
-                <input class="w-full border border-gray-200" type="number" name="phonenumber" id="phonenumber">
+                <input class="w-full border border-gray-200" value="{{ old('phonenumber') }}" type="number"
+                    name="phonenumber" id="phonenumber">
                 <div class="text-red-700 ">
                     @error('phonenumber')
                         {{ $message }}
@@ -51,13 +55,14 @@
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Role</label>
                 {{-- <input  class="w-full border border-gray-200" type="text" name="role" id="role"> --}}
-                <select class="w-full border border-gray-200" name="role" id="role">
+                <select class="w-full border border-gray-200" value="{{ old('role') }}" name="role" id="role">
                     {{-- @foreach (\App\Models\User::CRUD_ROLES as $role)
                <option value="{{$role}}"> {{$role}} </option>
                @endforeach --}}
-                    <option>Choose Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="customer">Customer</option>
+                    <option disabled selected>Choose Role</option>
+                    <option value="admin" @if (old('role') == 'admin') selected @endif>Admin</option>
+                    <option value="user" @if (old('role') == 'user') selected @endif>User</option>
+                    <option value="desk" @if (old('role') == 'desk') selected @endif>Desk</option>
                 </select>
                 <div class="text-red-700 ">
                     @error('role')
@@ -68,7 +73,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Date Of Birth</label>
-                <input class="w-full border border-gray-200" type="date" name="dob" id="dob">
+                <input class="w-full border border-gray-200" value="{{ old('date') }}" type="date" name="dob"
+                    id="dob">
                 <div class="text-red-700 ">
                     @error('dob')
                         {{ $message }}
@@ -77,7 +83,18 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Bloodgroup</label>
-                <input class="w-full border border-gray-200" type="text" name="bloodgroup" id="bloodgroup">
+                <select class="w-full border border-gray-200" value="{{ old('bloodgroup') }}" type="text"
+                    name="bloodgroup" id="bloodgroup">
+                    <option disabled selected>Choose Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
                 <div class="text-red-700 ">
                     @error('bloodgroup')
                         {{ $message }}
@@ -86,7 +103,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Post</label>
-                <input class="w-full border border-gray-200" type="text" name="post" id="post">
+                <input class="w-full border border-gray-200" value="{{ old('post') }}" type="text" name="post"
+                    id="post">
                 <div class="text-red-700 ">
                     @error('post')
                         {{ $message }}
@@ -96,7 +114,8 @@
 
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Entry Time</label>
-                <input class="w-full border border-gray-200 " type="time" name="entry_time" id="entry_time">
+                <input class="w-full border border-gray-200 " value="{{ old('entry_time') }}" type="time"
+                    name="entry_time" id="entry_time">
                 <div class="text-red-700 ">
                     @error('entry_time')
                         {{ $message }}
@@ -105,7 +124,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Exit Time</label>
-                <input class="w-full border border-gray-200 " type="time" name="exit_time" id="exit_time">
+                <input class="w-full border border-gray-200 " type="time" value="{{ old('exit_time') }}"
+                    name="exit_time" id="exit_time">
                 <div class="text-red-700 ">
                     @error('exit_time')
                         {{ $message }}
@@ -116,7 +136,8 @@
 
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Password</label>
-                <input class="w-full border border-gray-200" type="password" name="password" id="password">
+                <input class="w-full border border-gray-200" type="password" value="{{ old('password') }}"
+                    name="password" id="password">
                 <div class="text-red-700 ">
                     @error('password')
                         {{ $message }}
@@ -125,8 +146,8 @@
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Confirmed Password</label>
-                <input class="w-full border border-gray-200 " type="password" name="password_confirmation"
-                    id="password_confirmation">
+                <input class="w-full border border-gray-200 " type="password" value="{{ old('password_confirmation') }}"
+                    name="password_confirmation" id="password_confirmation">
                 <div class="text-red-700 ">
                     @error('password')
                         {{ $message }}
