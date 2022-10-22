@@ -17,7 +17,12 @@
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Title</label>
                 <input class="w-full border border-gray-200 " type="text" name="title" id="title"
-                    value="{{ $department->title }}">
+                    value="{{ old('titlle') ?? $department->title }}">
+                <div class="text-red-700 ">
+                    @error('title')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
 
 
