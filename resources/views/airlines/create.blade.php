@@ -3,26 +3,36 @@
     <div class="w-full bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Create Airline</span>
-            <a href="{{ route('departments.index') }}">
+            <a href="{{ route('airlines.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
                     <i class="mr-2 fa-solid fa-arrow-left"></i> Go Back </button>
             </a>
         </div>
         <form class="w-11/12 p-6 m-6 overflow-auto bg-white rounded-md " method="POST" action={{ route('airlines.store') }}>
             @csrf
-            @if ($errors->any())
-                {{ $errors }}
-            @endif
+
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Title</label>
-                <input class="w-full border border-gray-200 " type="text" name="title" id="title">
+                <input class="w-full border border-gray-200 " value="{{ old('title') }}" type="text" name="title"
+                    id="title">
+                <div class="text-red-700 ">
+                    @error('title')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Type</label>
-                <select class="block w-full border-gray-200" name="type" id="type">
+                <select class="block w-full border-gray-200" value="{{ old('type') }}" name="type" id="type">
+                    <option disabled selected>Choose Airline Type</option>
                     <option value="International">International</option>
-                    <option value="National">National</option>
+                    <option value="Domestic">Domestic</option>
                 </select>
+                <div class="text-red-700 ">
+                    @error('type')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
 
 
