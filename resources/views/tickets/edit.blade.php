@@ -5,7 +5,7 @@
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Edit Ticket</span>
             <a href="{{ route('tickets.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    <- Go Back </button>
+                    <i class="mr-1 fa-solid fa-arrow-left"></i> Go Back </button>
             </a>
 
         </div>
@@ -59,11 +59,10 @@
                 <label class="block font-bold text-gray-600 text-md">Airline Type</label>
                 <select class="w-full border border-gray-200 " name="airline_type" id="airline_type">
 
-                    <option value="domestic" @if ($ticket->airline_type == 'domestic') selected>
+                    <option value="domestic" @if ($ticket->airline_type == 'domestic') selected @endif>
                         Domestic
                     </option>
-                    <option value="international"@if ($ticket->airline_type == 'international') selected
-                        >
+                    <option value="international"@if ($ticket->airline_type == 'international') selected @endif>
                         International
                     </option>
                 </select>
