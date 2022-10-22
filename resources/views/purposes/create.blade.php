@@ -12,8 +12,14 @@
         <form class="w-11/12 p-6 m-6 overflow-auto bg-white rounded-md " method="POST" action={{ route('purposes.store') }}>
             @csrf
             <div class="mb-6">
-                <label class="block font-bold text-gray-600 text-md">Name</label>
-                <input class="w-full border border-gray-200 " type="text" name="name" id="name">
+                <label class="block font-bold text-gray-600 text-md">Purpose name</label>
+                <input class="w-full border border-gray-200 " value="{{ old('name') }}" type="text" name="name"
+                    id="name">
+                <div class="text-red-700 ">
+                    @error('name')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
