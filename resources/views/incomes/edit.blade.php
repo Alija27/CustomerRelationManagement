@@ -16,21 +16,41 @@
                 <label class="block font-bold text-gray-600 text-md">Particulars</label>
                 <input class="w-full border border-gray-200 " type="text" name="particulars" id="particulars"
                     value={{ $income->particulars }}>
+                <div class="text-red-700 ">
+                    @error('particulars')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Amount</label>
                 <input class="w-full border border-gray-200" type="text" name="amount" id="amount"
                     value={{ $income->amount }}>
+                <div class="text-red-700 ">
+                    @error('amount')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Remarks</label>
                 <input class="w-full border border-gray-200" type="text" name="remarks" id="remarks"
                     value={{ $income->remarks }}>
+                <div class="text-red-700 ">
+                    @error('remarks')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Date</label>
                 <input class="w-full border border-gray-200" type="date" name="date" id="date"
                     value={{ $income->date }}>
+                <div class="text-red-700 ">
+                    @error('date')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
