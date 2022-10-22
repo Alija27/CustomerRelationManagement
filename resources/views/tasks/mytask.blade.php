@@ -32,7 +32,7 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold"> My Tasks</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold"> My task</span>
 
         </div>
         <table class="max-w-full mx-5 my-5 display" id="myTable">
@@ -91,6 +91,44 @@
 
 
 
+
+                            <div class="flex flex-row gap-2">
+                                @if ($mytask->status != 'completed')
+                                    <a href="{{ route('tasks.edit', $mytask) }}" class="mt-2"> <span
+                                            class="px-2 py-2 mr-2 text-white bg-blue-800 rounded"> <i
+                                                class="fa-solid fa-pen-to-square"></i> </span></a>
+                                @endif
+                                @if ($mytask->status === 'pending')
+                                    <span onclick="show({{ $mytask->id }})"
+                                        class="p-1 px-2 py-2 mr-2 text-white bg-red-800 rounded cursor-pointer"><i
+                                            class="fa-solid fa-trash"></i></a> </span>
+                                @endif
+
+                                <form action="{{ route('task.pending', $mytask->id) }}" method="post">
+
+                                    @csrf
+
+                                    <button name="task_id" name="task_id" title="Pending"
+                                        class="p-2 px-2 text-white bg-red-600 rounded-lg">
+                                        <i class="fa fa-clock-rotate-left"></i></button>
+
+                                </form>
+
+                                <form action="{{ route('task.processing', $mytask->id) }}" method="post">
+                                    @csrf
+                                    <button name="task_id" id="task_id" title="Processing"
+                                        class="px-2 py-2 text-white bg-green-600 rounded-md">
+                                        <i class="mr-1 fa-solid fa-arrows-rotate fa-spin"></i></button>
+                                </form>
+
+                                <form action="{{ route('task.complete', $mytask->id) }}" method="post">
+                                    @csrf
+                                    <button name="task_id" id="task_id" title="Completed"
+                                        class="px-2 py-2 text-white bg-yellow-600 rounded-md"><i
+                                            class="fa-solid fa-check"></i></button>
+                                </form>
+
+                            </div>
                         </td>
 
 
@@ -116,7 +154,7 @@
                     <form action="{{ route('tasks.delete') }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <input type="hidden" name="tasks_id" id="tasks_id">
+                        <input type="hidden" name="mytask_id" id="mytask_id">
                         <button class="p-2 px-6 text-white bg-green-600 rounded-md">Yes</button>
 
                     </form>
@@ -138,7 +176,7 @@
         });
 
         function show($id) {
-            document.getElementById('tasks_id').value = $id;
+            document.getElementById('mytask_id').value = $id;
 
             $('#deleteModal').removeClass('hidden');
         }
