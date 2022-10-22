@@ -12,12 +12,17 @@
         <form class="w-11/12 p-6 m-6 overflow-auto bg-white rounded-md " method="POST"
             action={{ route('departments.store') }}>
             @csrf
-            @if ($errors->any())
-                {{ $errors }}
-            @endif
+
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Title</label>
-                <input class="w-full border border-gray-200 " type="text" name="title" id="title">
+                <input class="w-full border border-gray-200 " value="{{ old('title') }}" type="text" name="title"
+                    id="title">
+                <div class="text-red-700 ">
+                    @error('title')
+                        {{ $message }}
+                    @enderror
+                </div>
+
             </div>
 
 
