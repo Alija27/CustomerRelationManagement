@@ -15,15 +15,25 @@
             @csrf
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Title</label>
-                <input class="w-full border border-gray-200 " type="text" name="title" id="title"
-                    value="{{ $airline->title }}">
+                <input class="w-full border border-gray-200 " value="{{ old('title') }}" type="text" name="title"
+                    id="title" value="{{ $airline->title }}">
+                <div class="text-red-700 ">
+                    @error('title')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Type</label>
                 <select class="block w-full border-gray-200" name="type" id="type">
                     <option value="International" @if ($airline->type == 'International') selected @endif>International</option>
-                    <option value="National" @if ($airline->type == 'National') selected @endif>National</option>
+                    <option value="Domestic" @if ($airline->type == 'Domestic') selected @endif>Domestic</option>
                 </select>
+                <div class="text-red-700 ">
+                    @error('type')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
 
 
