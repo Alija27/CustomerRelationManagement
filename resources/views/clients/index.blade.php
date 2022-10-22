@@ -33,11 +33,13 @@
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Clients</span>
-            <a href="{{ route('clients.create') }}">
-                <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    Add New
-                </button>
-            </a>
+            @if (auth()->user()->role != 'user')
+                <a href="{{ route('clients.create') }}">
+                    <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
+                        <i class="mr-1 fa-solid fa-plus"></i> Add New
+                    </button>
+                </a>
+            @endif
         </div>
         <table class="max-w-full mx-5 my-5 display" id="myTable">
             <thead class="border-b">
@@ -61,12 +63,14 @@
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
                         Date of birth
                     </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
-                        Task
-                    </th>
-                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
-                        Action
-                    </th>
+                    @if (auth()->user()->role != 'user')
+                        <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
+                            Task
+                        </th>
+                        <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
+                            Action
+                        </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -90,19 +94,21 @@
                         <td class="text-sm font-medium text-gray-900 whitespace-nowrap">
                             {{ $client->dob }}
                         </td>
-                        <td class="text-sm font-medium text-gray-900 whitespace-nowrap">
-                            <a href="{{ route('tasks.assignTask', $client->id) }}"> <button
-                                    class="p-2 text-white bg-green-500 rounded-lg">Assign</button> </a>
-                        </td>
-                        <td class="text-sm font-medium whitespace-nowrap">
-                            <a href="{{ route('clients.edit', $client) }}"> <span
-                                    class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
-                                        class="fa-solid fa-pen-to-square"></i> </span></a>
-                            <span onclick="show({{ $client->id }})"
-                                class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
-                                    class="fa-solid fa-trash"></i></a> </span>
+                        @if (auth()->user()->role != 'user')
+                            <td class="text-sm font-medium text-gray-900 whitespace-nowrap">
+                                <a href="{{ route('tasks.assignTask', $client->id) }}"> <button
+                                        class="p-2 text-white bg-green-500 rounded-lg">Assign</button> </a>
+                            </td>
+                            <td class="text-sm font-medium whitespace-nowrap">
+                                <a href="{{ route('clients.edit', $client) }}"> <span
+                                        class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
+                                            class="fa-solid fa-pen-to-square"></i> </span></a>
+                                <span onclick="show({{ $client->id }})"
+                                    class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
+                                        class="fa-solid fa-trash"></i></a> </span>
 
-                        </td>
+                            </td>
+                        @endif
 
                     </tr>
                 @endforeach
