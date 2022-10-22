@@ -13,19 +13,43 @@
             @csrf
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Particulars</label>
-                <input class="w-full border border-gray-200 " type="text" name="particulars" id="particulars">
+                <input class="w-full border border-gray-200 " value="{{ old('particulars') }}"type="text"
+                    name="particulars" id="particulars">
+                <div class="text-red-700 ">
+                    @error('particulars')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Amount</label>
-                <input class="w-full border border-gray-200" type="number" name="amount" id="amount">
+                <input class="w-full border border-gray-200" value="{{ old('amount') }}"type="number" name="amount"
+                    id="amount">
+                <div class="text-red-700 ">
+                    @error('amount')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Remarks</label>
-                <input class="w-full border border-gray-200" type="text" name="remarks" id="remarks">
+                <input class="w-full border border-gray-200" value="{{ old('reamrks') }}" type="text" name="remarks"
+                    id="remarks">
+                <div class="text-red-700 ">
+                    @error('remarks')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Date</label>
-                <input class="w-full border border-gray-200" type="date" name="date" id="date">
+                <input class="w-full border border-gray-200" value="{{ old('date') }}" type="date" name="date"
+                    id="date">
+                <div class="text-red-700 ">
+                    @error('date')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
