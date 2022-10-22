@@ -41,15 +41,34 @@
             </a>
 
         </div>
-        <div class="flex justify-between mb-6 border-b border-gray-200">
-            <div class="p-6 m-1 mx-4 my-4 shadow-md">
-                <div class="text-2xl font-bold">Total Income</div>
-
-                <span class="mx-5 text-center ">{{ $total }}</span>
+        <div class="flex gap-10 m-2 mb-6 ">
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Total Income</div>
+                    <div class="text-sm text-gray-600">Rs {{ $total }}</div>
+                </div>
+            </div>
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Today Income</div>
+                    <div class="text-sm text-gray-600">Rs {{ $today }}</div>
+                </div>
+            </div>
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Monthly Income</div>
+                    <div class="text-sm text-gray-600">Rs {{ $monthly }}</div>
+                </div>
             </div>
 
-
         </div>
+
         <table class="max-w-full mx-5 my-5 display" id="myTable">
             <thead class="border-b">
                 <tr class="bg-indigo-600 ">
@@ -92,9 +111,7 @@
                             <span onclick="show({{ $income->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('incomes.show', $income->id) }}"><span
-                                    class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
-                                        class="fa-solid fa-eye"></i></span></a>
+
 
                         </td>
 
