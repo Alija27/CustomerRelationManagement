@@ -35,7 +35,7 @@
             <span class="m-1 mx-4 my-4 text-2xl font-bold">User Birthday</span>
 
         </div>
-        <table class="w-[96%] mx-5 my-5 display">
+        <table class="w-[96%] mx-5 my-5 display" id="myTable">
             <thead class="border-b">
                 <tr class="px-8 bg-indigo-600">
                     <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
