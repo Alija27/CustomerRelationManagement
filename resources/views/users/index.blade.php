@@ -87,7 +87,7 @@
                                     class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
                                         class="fa-solid fa-eye"></i></span></a>
                             <a href="{{ route('user.task', $user->id) }}"><span
-                                    class="p-1 px-2 mr-2 text-white bg-yellow-800 rounded cursor-pointer"> View
+                                    class="p-1 px-2 mr-2 text-white bg-green-500 rounded cursor-pointer"> View
                                     Task</span></a>
                         </td>
 
