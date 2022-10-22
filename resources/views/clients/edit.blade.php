@@ -16,27 +16,52 @@
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Name</label>
                 <input class="w-full border border-gray-200 " type="text" name="name" id="name"
-                    value="{{ $client->name }}">
+                    value="{{ old('name') ?? $client->name }}">
+                <div class="text-red-700 ">
+                    @error('name')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Email</label>
                 <input class="w-full border border-gray-200" type="text" name="email" id="email"
-                    value={{ $client->email }}>
+                    value={{ old('email') ?? $client->email }}>
+                <div class="text-red-700 ">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Address</label>
                 <input class="w-full border border-gray-200" type="text" name="address" id="address"
-                    value={{ $client->address }}>
+                    value={{ old('address') ?? $client->address }}>
+                <div class="text-red-700 ">
+                    @error('address')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Phonenumber</label>
                 <input class="w-full border border-gray-200" type="number" name="phonenumber" id="phonenumber"
-                    value={{ $client->phonenumber }}>
+                    value={{ old('phonenumber') ?? $client->phonenumber }}>
+                <div class="text-red-700 ">
+                    @error('phonenumber')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Date of birth</label>
                 <input class="w-full border border-gray-200 " type="date" name="dob" id="dob"
-                    value="{{ $client->dob }}">
+                    value="{{ old('dob') ?? $client->dob }}">
+                <div class="text-red-700 ">
+                    @error('dob')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             {{-- <div class="mb-6">
             <label class="block font-bold text-gray-600 text-md">Added By</label>
