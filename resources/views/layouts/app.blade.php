@@ -14,65 +14,94 @@
     @yield('css')
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Style --}}
+    <style>
+        .main-sidebar::-webkit-scrollbar,
+        .scrollbar::-webkit-scrollbar {
+            width: 0.25em;
+        }
+
+        .main-sidebar::-webkit-scrollbar-track {}
+
+        .main-sidebar::-webkit-scrollbar-thumb,
+        .scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgb(219, 219, 219);
+            border-radius: 50px;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
-
     {{-- @include('layouts.navigation') --}}
+    <div>
+        <x-alert />
+    </div>
     <div class="flex">
         <nav class="fixed hidden h-screen bg-white shadow-lg hover:overflow-y-scroll main-sidebar lg:w-2/12 lg:block ">
-            <div class="p-6 mx-6">
-                <ul class="text-xl antialiased font-bold text-blue-500">
-                    <li><i class="pr-2 fa-solid fa-user"></i>
-                        Alija
+            <div class="p-2 px-6 mx-6 border-b">
+
+                <ul class="text-xl antialiased font-bold text-indigo-500">
+                    <li class="my-4">
+                        <i class="pr-2 fa-solid fa-calculator"></i> CRM
+                    </li>
+                    <li class="text-sm text-gray-500">
+                        Welcome, {{ Auth::user()->name }}
                     </li>
 
                 </ul>
+
             </div>
             <div class="px-2 ">
                 <ul class="pl-2 antialiased font-bold text-md ">
                     <a href="{{ route('dashboard') }}">
                         <li
-                            class="{{ request()->routeIs('dashboard') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                            class="{{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 ">
                             <i class="pr-2 fa-solid fa-gauge-high"></i>
                             Dashboard
                         </li>
                     </a>
-                    <a href="{{ route('users.index') }}">
-                        <li
-                            class="px-2 py-2  {{ request()->routeIs('users*') ? 'bg-indigo-600 text-white' : '' }} rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-users"></i>
-                            Users
-                        </li>
-                    </a>
+                    @role('admin')
+                        <a href="{{ route('users.index') }}">
+                            <li
+                                class="px-2 py-2  {{ request()->routeIs('users*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}  hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-users"></i>
+                                Users
+                            </li>
+                        </a>
+                    @endrole
                     <a href="{{ route('clients.index') }}">
                         <li
-                            class="px-2 py-2 my-2 {{ request()->routeIs('clients*') ? 'bg-indigo-600 text-white' : '' }} rounded-md hover:bg-indigo-600 hover:text-white">
+                            class="px-2 py-2 my-2 {{ request()->routeIs('clients*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}  hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-user-group"></i>
                             Clients
                         </li>
                     </a>
-                    <a href="{{ route('departments.index') }}">
-                        <li
-                            class="px-2 py-2 my-2 rounded-md {{ request()->routeIs('departments*') ? 'bg-indigo-600 text-white' : '' }} hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-building"></i>
-                            Departments
-                        </li>
-                    </a>
+                    @role('admin')
+                        <a href="{{ route('departments.index') }}">
+                            <li
+                                class="px-2 py-2 my-2  {{ request()->routeIs('departments*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-building"></i>
+                                Departments
+                            </li>
+                        </a>
+                    @endrole
                     <a href="{{ route('airlines.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-plane-departure"></i>
                             Airlines
                         </li>
                     </a>
-                    <a href="{{ route('admin.attendence') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-regular fa-calendar-check"></i>
-                            All Attendence
-                        </li>
-                    </a>
+                    @role('admin')
+                        <a href="{{ route('admin.attendence') }}">
+                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-regular fa-calendar-check"></i>
+                                All Attendences
+                            </li>
+                        </a>
+                    @endrole
                     <a href="{{ route('attendences.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-clipboard-user"></i>
                             My attendence
                         </li>
@@ -80,78 +109,115 @@
                     <div>
 
                         <li onclick="birthdayToggle()"
-                            class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white                       {{ Route::is('birthday.users') || Route::is('birthday.clients') ? 'bg-indigo-600 text-white' : '' }}">
+                            class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600                       {{ Route::is('birthday.users') || Route::is('birthday.clients') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}">
                             <i class="pr-2 fa-solid fa-cake-candles"></i>
                             Birthday <i class="ml-16 fa-solid fa-caret-down"></i>
                         </li>
-
-                        <a href="{{ route('birthday.users') }}">
-                            <li
-                                class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white {{ Route::is('birthday.users') || Route::is('birthday.users') ? ' bg-indigo-200 ' : 'hidden' }}
-                                birthday">
-                                <i class="pr-2 fa-solid fa-gauge-high"></i>
-                                User Birthday
-                            </li>
-                        </a>
-                        <a href="{{ route('birthday.clients') }}">
-                            <li
-                                class="px-2 py-2   rounded-md hover:bg-indigo-600 hover:text-white {{ Route::is('birthday.clients') || Route::is('birthday.clients') ? 'bg-indigo-200' : 'hidden' }}
-                                birthday">
-                                <i class="pr-2 fa-solid fa-users"></i>
-                                Client Birthday
-                            </li>
-                        </a>
+                        <div class="ml-8 bg-gray-200">
+                            <a href="{{ route('birthday.users') }}">
+                                <li
+                                    class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.users') || Route::is('birthday.users') ? ' bg-indigo-200 ' : 'hidden' }}
+                                    birthday">
+                                    <i class="pr-2 fa-solid fa-gauge-high"></i>
+                                    User Birthday
+                                </li>
+                            </a>
+                            <a href="{{ route('birthday.clients') }}">
+                                <li
+                                    class="px-2 py-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.clients') || Route::is('birthday.clients') ? 'bg-indigo-200' : 'hidden' }}
+                                    birthday">
+                                    <i class="pr-2 fa-solid fa-users"></i>
+                                    Client Birthday
+                                </li>
+                            </a>
+                        </div>
                     </div>
-
-                    <a href="{{ route('admin.leaves') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-address-book"></i>
-                            All Leave
-                        </li>
-                    </a>
-                    <a href="{{ route('leaves.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-envelope"></i>
-                            My Leave
-                        </li>
-                    </a>
-                    <a href="{{ route('purposes.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-bars"></i>
-                            Purpose
-                        </li>
-                    </a>
+                    @role('admin')
+                        <a href="{{ route('admin.leaves') }}">
+                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-address-book"></i>
+                                All Leave
+                            </li>
+                        </a>
+                    @endrole
+                    @role('user')
+                        <a href="{{ route('leaves.index') }}">
+                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-envelope"></i>
+                                My Leave
+                            </li>
+                        </a>
+                    @endrole
+                    @role('admin')
+                        <a href="{{ route('purposes.index') }}">
+                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-bars"></i>
+                                Purpose
+                            </li>
+                        </a>
+                    @endrole
                     <a href="{{ route('tasks.index') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
+                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-list-check"></i>
                             Tasks
                         </li>
                     </a>
-                    <a href="{{ route('task.mytask') }}">
-                        <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-briefcase"></i>
-                            My Task
-                        </li>
-                    </a>
-                    <a href="{{ route('incomes.index') }}">
+                    @role('user')
+                        <a href="{{ route('task.mytask') }}">
+                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-briefcase"></i>
+                                My Task
+                            </li>
+                        </a>
+                    @endrole
+                    @role('admin')
+                        <a href="{{ route('incomes.index') }}">
+                            <li
+                                class="{{ request()->routeIs('incomes*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-money-check-dollar"></i>
+                                Incomes
+                            </li>
+                        </a>
+                    @endrole
+                    @role('desk')
+                        <a href="{{ route('incomes.index') }}">
+                            <li
+                                class="{{ request()->routeIs('incomes*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-money-check-dollar"></i>
+                                Incomes
+                            </li>
+                        </a>
+                    @endrole
+                    @role('admin')
+                        <a href="{{ route('expenditures.index') }}">
+                            <li
+                                class="{{ request()->routeIs('expenditures*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-coins"></i>Expenditures
+                            </li>
+                        </a>
+                    @endrole
+                    @role('desk')
+                        <a href="{{ route('expenditures.index') }}">
+                            <li
+                                class="{{ request()->routeIs('expenditures*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
+                                <i class="pr-2 fa-solid fa-coins"></i>Expenditures
+                            </li>
+                        </a>
+                    @endrole
+                    <a href="{{ route('tickets.index') }}">
                         <li
-                            class="{{ request()->routeIs('incomes*') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-money-check-dollar"></i>
-                            Incomes
+                            class="{{ request()->routeIs('tickets*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
+                            <i class="pr-2 fa-solid fa-gauge-high"></i>
+                            Tickets
                         </li>
                     </a>
-                    <a href="{{ route('expenditures.index') }}">
-                        <li
-                            class="{{ request()->routeIs('expenditures*') ? 'bg-indigo-600 text-white' : '' }} px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                            <i class="pr-2 fa-solid fa-coins"></i>Expenditures
-                        </li>
-                    </a>
-                    <li class="px-2 py-2 my-2 rounded-md hover:bg-indigo-600 hover:text-white">
-                        <form action="{{ route('logout') }}" method="post">
+                    <form action="{{ route('logout') }}" method="post">
+                        <button
+                            class="fixed bottom-0 py-2 my-2 text-white bg-indigo-500 rounded-md px-14 hover:bg-indigo-50 hover:text-indigo-600">
                             @csrf
                             <i class="pr-2 fa-solid fa-right-from-bracket"></i> <input type="submit" value="Logout">
-                        </form>
-                    </li>
+                        </button>
+                    </form>
                 </ul>
             </div>
         </nav>
