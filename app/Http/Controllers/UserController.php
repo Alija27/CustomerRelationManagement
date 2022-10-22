@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("users.create");
+        if (auth()->user()->role == 'user') {
+            return abort(403);
+        } else {
+            return view("users.create");
+        }
     }
 
     /**
@@ -35,27 +40,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $data = $request->validate([
-            "name" => ["required"],
-            "email" => ["required"],
-            "password" => ["required"],
-            "address" => ["required"],
-            "phonenumber" => ["required"],
-            "role" => ["required", /* Rule::in(User::CRUD_ROLES) */],
-            "post" => ["required"],
-            "dob" => ["required"],
-            "bloodgroup" => ["required"],
-            "entry_time" => ["required"],
-            "exit_time" => ["required"],
-        ], ["name.required" => "Please enter your name"]);
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
         $user = User::create($data);
-        if ($user) {
-            toastr()->success('Data has been saved successfully!');
-        }
 
-        return redirect()->route('users.index')->with("message", "User Created Sucessfully");
+        return redirect()->route('users.index')->with("success", "User Created Sucessfully");
     }
 
     /**
@@ -87,26 +78,14 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-
-        $data = $request->validate([
-            "name" => ["required"],
-            "email" => ["required"],
-            "address" => ["required"],
-            "phonenumber" => ["required"],
-            "role" => ["required", /* Rule::in(User::CRUD_ROLES) */],
-            "post" => ["required"],
-            "dob" => ["required"],
-            "bloodgroup" => ["required"],
-            "entry_time" => ["required"],
-            "exit_time" => ["required"],
-
-        ]);
+        // dd($request->all());
+        $data = $request->validated();
 
         $user->update($data);
 
-        return redirect()->route('users.index')->with("message", "User Updated Sucessfully");
+        return redirect()->route('users.index')->with("success", "User Updated Sucessfully");
     }
 
     /**
@@ -130,6 +109,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $task = Task::where("user_id", $user->id)->get();
-        return view("users.task", compact("task"));
+        return view("users.task", compact("task", "user"));
     }
 }
