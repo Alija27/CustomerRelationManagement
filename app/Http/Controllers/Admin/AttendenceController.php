@@ -20,6 +20,6 @@ class AttendenceController extends Controller
         $user = User::find($id);
         $attendences = Attendence::where('user_id', $user->id)->get();
         // dd($attendences);
-        return view('admin.attendences.show', compact("attendences"));
+        return view('admin.attendences.show', compact("attendences", "user"));
     }
 }
