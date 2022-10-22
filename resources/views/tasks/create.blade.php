@@ -20,6 +20,11 @@
                         </option>
                     @endforeach
                 </select>
+                <div class="text-red-700 ">
+                    @error('user_id')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Client</label>
@@ -30,6 +35,11 @@
                     </option>
 
                 </select>
+                <div class="text-red-700 ">
+                    @error('client_id')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Department</label>
@@ -41,6 +51,11 @@
                         </option>
                     @endforeach
                 </select>
+                <div class="text-red-700 ">
+                    @error('department_id')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Purpose</label>
@@ -51,10 +66,20 @@
                         </option>
                     @endforeach
                 </select>
+                <div class="text-red-700 ">
+                    @error('purpose_id')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block font-bold text-gray-600 text-md">Remark</label>
                 <textarea class="w-full border border-gray-200 " name="remarks" id="remarks"> </textarea>
+                <div class="text-red-700 ">
+                    @error('remarks')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
 
 
