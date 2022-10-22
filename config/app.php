@@ -187,8 +187,6 @@ return [
          */
 
 
-        Yoeunes\Toastr\ToastrServiceProvider::class,
-
 
         /*
          * Application Service Providers...
