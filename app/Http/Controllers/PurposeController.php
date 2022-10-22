@@ -41,7 +41,7 @@ class PurposeController extends Controller
         ]);
 
         Purpose::create($purpose);
-        return redirect()->route("purposes.index")->with("message", "Purpose created sucessfully");
+        return redirect()->route("purposes.index")->with("success", "Purpose created sucessfully");
     }
 
     /**
@@ -79,7 +79,7 @@ class PurposeController extends Controller
             "name" => ["required"],
         ]);
         $purpose->update($data);
-        return redirect()->route("purposes.index")->with("message", "Purpose updated Sucessfully");
+        return redirect()->route("purposes.index")->with("success", "Purpose updated Sucessfully");
     }
 
     /**
