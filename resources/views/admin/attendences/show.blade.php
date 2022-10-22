@@ -32,7 +32,7 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">Individual Attendences</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">{{ $user->name }}'s Attendences</span>
             <a href="{{ route('users.create') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
                     <i class="mr-2 fa-solid fa-arrow-left"></i> GoBack
