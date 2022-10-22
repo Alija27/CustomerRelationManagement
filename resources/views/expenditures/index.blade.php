@@ -92,9 +92,7 @@
                             <span onclick="show({{ $expenditure->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('expenditures.show', $expenditure->id) }}"><span
-                                    class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
-                                        class="fa-solid fa-eye"></i></span></a>
+
 
                         </td>
 
