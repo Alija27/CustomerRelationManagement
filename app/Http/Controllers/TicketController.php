@@ -78,7 +78,7 @@ class TicketController extends Controller
             "description" => ["required"],
         ]);
         Ticket::create($ticket);
-        return redirect()->route("tickets.index")->with("message", "Ticket booked sucessfully");
+        return redirect()->route("tickets.index")->with("success", "Ticket booked sucessfully");
     }
 
     /**
@@ -89,7 +89,6 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        return view("tickets.show", compact("ticket"));
     }
 
     /**
@@ -126,7 +125,7 @@ class TicketController extends Controller
             "description" => ["required"],
         ]);
         $ticket->update($data);
-        return redirect()->route("tickets.index")->with("message", "Ticket updated sucessfully");
+        return redirect()->route("tickets.index")->with("success", "Ticket updated sucessfully");
     }
 
     /**
