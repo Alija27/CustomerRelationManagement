@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -33,12 +34,15 @@ class AuthenticatedSessionController extends Controller
 
         // dd($request);
         $user = User::where('email', $request->email)->first();
+
+        if ($user == null) {
+            return abort(403, 'No user found');
+        }
         // dd($user);
         abort_if($user->status != 'active', 403, "You are not allowed to login");
         $request->authenticate();
 
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -55,6 +59,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
 
         return redirect('/');
     }
