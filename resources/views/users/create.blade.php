@@ -86,14 +86,14 @@
                 <select class="w-full border border-gray-200" value="{{ old('bloodgroup') }}" type="text"
                     name="bloodgroup" id="bloodgroup">
                     <option disabled selected>Choose Blood Group</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
+                    <option value="A+" @if (old('bloodgroup') == 'A+') selected @endif>A+</option>
+                    <option value="A-"@if (old('bloodgroup') == 'A-') selected @endif>A-</option>
+                    <option value="B+"@if (old('bloodgroup') == 'B+') selected @endif>B+</option>
+                    <option value="B-"@if (old('bloodgroup') == 'B-') selected @endif>B-</option>
+                    <option value="O+"@if (old('bloodgroup') == 'O+') selected @endif>O+</option>
+                    <option value="O-"@if (old('bloodgroup') == 'O-') selected @endif>O-</option>
+                    <option value="AB+"@if (old('bloodgroup') == 'AB+') selected @endif>AB+</option>
+                    <option value="AB-"@if (old('bloodgroup') == 'AB-') selected @endif>AB-</option>
                 </select>
                 <div class="text-red-700 ">
                     @error('bloodgroup')
