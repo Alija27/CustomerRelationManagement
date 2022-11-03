@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user == null) {
-            return redirect()->back()->with('error', 'No user found with this email');
+            return redirect()->back()->with('error', 'This credentials dosenot match.');
         }
         // dd($user);
         abort_if($user->status != 'active', 403, "You are not allowed to login");
