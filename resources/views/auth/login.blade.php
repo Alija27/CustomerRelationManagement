@@ -16,10 +16,11 @@
 </head>
 
 <body class="font-sans antialiased ">
-    <div class="grid md:items-center bg-white md:h-screen ">
+    <x-alert />
+    <div class="grid bg-white md:items-center md:h-screen ">
         <div
             class="grid md:grid-cols-2 md:gap-8  mx-auto  my-[20%] md:my-0 bg-gray-50 rounded-md md:w-9/12 w-8/12 border-2">
-            <div class="my-auto grid items-center w-full px-8 py-8">
+            <div class="grid items-center w-full px-8 py-8 my-auto">
 
                 <form class="w-full" method="POST" action="{{ route('login') }}">
                     <h1 class="text-2xl font-bold text-center">Welcome Back</h1>
@@ -57,7 +58,7 @@
                             type="submit">Login</button>
                     </div>
             </div>
-            <div class="hidden md:block shadow-md rounded-md border">
+            <div class="hidden border rounded-md shadow-md md:block">
                 <div>
                     <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1662370387~exp=1662370987~hmac=03f4a45ff04c3e0bda1c0ddf531c0baa689cfadecde5743fdfffa5e05f3f1e71"
                         class="object-cover rounded-2xl ">
