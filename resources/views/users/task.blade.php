@@ -32,7 +32,7 @@
     @endif
     <div class="w-full overflow-auto bg-white border border-gray-200 shadow-md">
         <div class="flex justify-between mb-6 border-b border-gray-200">
-            <span class="m-1 mx-4 my-4 text-2xl font-bold">{{ $user->name }} Task</span>
+            <span class="m-1 mx-4 my-4 text-2xl font-bold">{{ $user->name }}'s Task</span>
 
 
 
