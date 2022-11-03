@@ -87,9 +87,9 @@
     {{-- warning --}}
     @if (session('warning'))
         <div x-show="show" x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)"
-            class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 transition-all bg-white border-4 border-indigo-200 rounded-lg ">
+            class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 transition-all bg-white border-4 border-orange-200 rounded-lg ">
             <div
-                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-indigo-500 bg-indigo-100 rounded-lg">
+                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
