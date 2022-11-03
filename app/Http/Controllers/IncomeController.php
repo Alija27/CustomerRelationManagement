@@ -101,4 +101,11 @@ class IncomeController extends Controller
     {
         //
     }
+
+    public function deleteIncome(Request $request)
+    {
+        $income = Income::find($request->income_id);
+        $income->delete();
+        return redirect()->back();
+    }
 }
