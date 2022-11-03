@@ -77,7 +77,7 @@
                         </td>
 
                         <td class="text-sm font-medium whitespace-nowrap">
-                            <a href="{{ route('admin.attendence.show', $user->id) }}"><span
+                            <a title="View" href="{{ route('admin.attendence.show', $user->id) }}"><span
                                     class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
                                         class="fa-solid fa-eye"></i></span></a>
                         </td>
