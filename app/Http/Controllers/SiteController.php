@@ -22,7 +22,7 @@ class SiteController extends Controller
         $attendences = Attendence::where('user_id', auth()->user()->id)->count();
         $leaves = Leave::where('user_id', auth()->user()->id)->count();
         $clients = Client::all()->count();
-        $this_month_attendence = Attendence::whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->count();
+        $this_month_attendence = Attendence::where('user_id', Auth::id())->whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->count();
         $client_birthday_total = Client::whereMonth('dob', Carbon::now()->month)->whereDay('dob', '>=', Carbon::now()->day)->orderByRaw('DAYOFYEAR(dob)')->count();
         $user_birthday_total = User::whereMonth('dob', Carbon::now()->month)->whereDay('dob', '>=', Carbon::now()->day)->orderByRaw('DAYOFYEAR(dob)')->count();
         $today_ticket = Ticket::whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->whereDay('date', Carbon::now()->day)->count();
@@ -110,9 +110,9 @@ class SiteController extends Controller
         $task_completed_count = Task::where("user_id", Auth::id())->where('status', '=', "completed")->count();
         $total_tasks = Task::count();
 
-        $pending_task_percent = (float)((float)$task_pending_count / $total_tasks) * 100;
-        $processing_task_percent = (float)((float)$task_processing_count / $total_tasks) * 100;
-        $completed_task_percent = (float)((float)$task_completed_count / $total_tasks) * 100;
+        $pending_task_percent = $total_tasks == 0 ? 0 : (float)((float)$task_pending_count / $total_tasks) * 100;
+        $processing_task_percent = $total_tasks == 0 ? 0 : (float)((float)$task_processing_count / $total_tasks) * 100;
+        $completed_task_percent =  $total_tasks == 0 ? 0 : (float)((float)$task_completed_count / $total_tasks) * 100;
 
         $finalTaskReport = json_encode([
             [
@@ -129,15 +129,18 @@ class SiteController extends Controller
             ]
         ]);
 
-        /*         $last12month = Carbon::now()->subMonth(12)->format('M');
- */        // dd($last12month);
-        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        $months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+
         $attendence_bar = array();
+
+
         foreach ($months as $month) {
-            array_push($attendence_bar, Attendence::where("user_id", auth()->user()->id)->whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::parse($month))->count());
+            array_push($attendence_bar, Attendence::where("user_id", auth()->user()->id)->whereYear('date', Carbon::now()->year)->whereMonth('date', $month)->count());
         }
         $finalAttendenceReport = json_encode(collect($attendence_bar)->values());
-
+        // dd($finalAttendenceReport);
         return view('dashboard', compact("attendences", 'attendence', 'leaves', 'clients', 'this_month_attendence', 'client_birthday_total', 'user_birthday_total', 'today_ticket', 'upcomming_ticket', 'today_income', 'u_birthday', 'c_birthday', 'today_expenditure', 'finalIncomeExpenditureReport', 'finalTaskReport', 'finalAttendenceReport'));
     }
 
