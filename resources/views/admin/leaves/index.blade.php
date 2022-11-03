@@ -125,10 +125,10 @@
                                         class="p-1 px-2 mr-2 text-white bg-indigo-800 rounded"><i
                                             class="fa-regular fa-eye"></i>
                                     </button></a>
-                                <button onclick="popup('{{ $leave->id }}')"
+                                <button onclick="popup('{{ $leave->id }}')" title="approve"
                                     class="p-1 px-2 mr-2 text-white bg-green-800 rounded"><i
                                         class="fa-regular fa-circle-check"></i> </button>
-                                <button onclick="reject('{{ $leave->id }}')"
+                                <button onclick="reject('{{ $leave->id }}')" title="reject"
                                     class="p-1 px-2 mr-2 text-white bg-red-800 rounded"><i
                                         class="fa-regular fa-circle-xmark"></i> </button>
 
@@ -158,13 +158,13 @@
                     <form action="{{ route('admin.leave.approved') }}" method="post">
                         @csrf
 
-                        <div class="flex flex-col mt-8 space-x-5">
+                        <div class="flex flex-col mt-2 space-x-5">
 
                             <input type="hidden" id="leave_id_approved" value="" name="leave_id">
 
                             <textarea class="border-gray-800 rounded border-1" name="remarks" id="remarks"></textarea>
 
-                            <button class="p-2 px-6 text-white bg-green-600 rounded-md">Approve</button>
+                            <button class="p-2 px-6 mt-1 text-white bg-green-600 rounded-md">Approve</button>
                         </div>
                     </form>
 
