@@ -70,8 +70,9 @@ class LeaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function show(Leave $leave)
+    public function show($id)
     {
+        $leave = Leave::find($id);
         return view("leaves.show", compact("leave"));
     }
 
@@ -109,7 +110,7 @@ class LeaveController extends Controller
 
             $name = str_replace(' ', '', auth()->user()->name) . Str::random(20);
             $data['image'] = $this->uploadImage($request->file('image'), $name, "leave");
-            dd($data['image']);
+
             if ($leave->image) {
 
                 Storage::delete($leave->image);
@@ -130,5 +131,12 @@ class LeaveController extends Controller
      */
     public function destroy(Leave $leave)
     {
+    }
+
+    public function deleteLeave(Request $request)
+    {
+        $leave = Leave::find($request->leave_id);
+        $leave->delete();
+        return redirect()->back();
     }
 }
