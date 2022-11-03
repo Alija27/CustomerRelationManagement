@@ -123,12 +123,14 @@ class AttendenceController extends Controller
 
         $data['total_time'] = Carbon::parse($a->diffInSeconds($b))->format("H:i:s");
 
+        // check already clocked out
+        if ($attendence->clock_out !== null) {
+            return redirect()->back()->with('warning', 'Already clocked out.');
+        }
+
         if (Auth::user()->exit_time > Carbon::now()->format('H:i:s')) {
-
-
             if ($request->reason == NULL) {
-                // return "hello";
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard')->with('error', 'Provide reason for early exit.');
             }
 
             $data['early_exit'] = $request->reason;
@@ -146,5 +148,12 @@ class AttendenceController extends Controller
     public function destroy(Attendence $attendence)
     {
         //
+    }
+
+    public function monthattendence()
+    {
+
+        $attendences = Attendence::where('user_id', auth()->user()->id)->whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->get();
+        return view("attendences.monthattendence", compact("attendences"));
     }
 }
