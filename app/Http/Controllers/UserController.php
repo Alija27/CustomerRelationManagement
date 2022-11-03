@@ -101,8 +101,13 @@ class UserController extends Controller
     public function deleteUser(Request $request)
     {
         $user = User::find($request->user_id);
+        // return count($user->tasks);
+        if (count($user->tasks) > 0 || count($user->attendence) > 0 || count($user->leave) > 0) {
+            $user->update(['status' => 'inactive']);
+            return redirect()->back()->with('error', 'This user has relation with other models. Status changed to inactive');
+        }
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 
     public function viewTask($id)
