@@ -77,13 +77,13 @@
                             {{ $user->phonenumber }}
                         </td>
                         <td class="text-sm font-medium border border-gray-200 whitespace-nowrap">
-                            <a href="{{ route('users.edit', $user) }}"> <span
+                            <a title="Edit" href="{{ route('users.edit', $user) }}"> <span
                                     class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
                                         class="fa-solid fa-pen-to-square"></i> </span></a>
-                            <span onclick="show({{ $user->id }})"
+                            <span title="Delete" onclick="show({{ $user->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
-                            <a href="{{ route('users.show', $user->id) }}"><span
+                            <a title="View Details" href="{{ route('users.show', $user->id) }}"><span
                                     class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer"> <i
                                         class="fa-solid fa-eye"></i></span></a>
                             <a href="{{ route('user.task', $user->id) }}"><span
