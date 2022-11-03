@@ -38,8 +38,8 @@
         <x-alert />
     </div>
     <div class="flex">
-        <nav class="fixed hidden h-screen bg-white shadow-lg hover:overflow-y-scroll main-sidebar lg:w-2/12 lg:block ">
-            <div class="p-2 px-6 mx-6 border-b">
+        <nav class="fixed hidden h-screen bg-white shadow-lg lg:w-2/12 lg:flex lg:flex-col">
+            <div class="px-6 mx-6 h-[20vh]">
 
                 <ul class="text-xl antialiased font-bold text-indigo-500">
                     <li class="my-4">
@@ -52,7 +52,7 @@
                 </ul>
 
             </div>
-            <div class="px-2 ">
+            <div class="px-2 h-[90vh] overflow-y-scroll main-sidebar border-b border-t">
                 <ul class="pl-2 antialiased font-bold text-md ">
                     <a href="{{ route('dashboard') }}">
                         <li
@@ -87,21 +87,24 @@
                         </a>
                     @endrole
                     <a href="{{ route('airlines.index') }}">
-                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                        <li
+                            class="px-2 py-2  {{ request()->routeIs('airlines*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-plane-departure"></i>
                             Airlines
                         </li>
                     </a>
                     @role('admin')
                         <a href="{{ route('admin.attendence') }}">
-                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                            <li
+                                class="{{ request()->routeIs('admin.attendence*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}  px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                                 <i class="pr-2 fa-regular fa-calendar-check"></i>
                                 All Attendences
                             </li>
                         </a>
                     @endrole
                     <a href="{{ route('attendences.index') }}">
-                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                        <li
+                            class="{{ request()->routeIs('attendences*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-clipboard-user"></i>
                             My attendence
                         </li>
@@ -109,24 +112,28 @@
                     <div>
 
                         <li onclick="birthdayToggle()"
-                            class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600                       {{ Route::is('birthday.users') || Route::is('birthday.clients') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}">
+                            class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.*') ? 'bg-indigo-50 text-indigo-600 border-indigo-600' : '' }}">
                             <i class="pr-2 fa-solid fa-cake-candles"></i>
-                            Birthday <i class="ml-16 fa-solid fa-caret-down"></i>
+                            Birthday
+                            <i
+                                class="ml-16 fa-solid fa-caret-left left-icon {{ Route::is('birthday.*') ? 'hidden' : '' }}"></i>
+                            <i
+                                class="ml-16 fa-solid fa-caret-down down-icon {{ !Route::is('birthday.*') ? 'hidden' : '' }}"></i>
                         </li>
-                        <div class="ml-8 bg-gray-200">
+                        <div class="ml-8 bg-gray-200 {{ request()->routeIs('birthday.*') ? '' : 'hidden' }} birthday">
                             <a href="{{ route('birthday.users') }}">
                                 <li
-                                    class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.users') || Route::is('birthday.users') ? ' bg-indigo-200 ' : 'hidden' }}
-                                    birthday">
-                                    <i class="pr-2 fa-solid fa-gauge-high"></i>
+                                    class="px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.users') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}
+                                    ">
+                                    <i class="mr-1 fa-solid fa-cake-candles"></i>
                                     User Birthday
                                 </li>
                             </a>
                             <a href="{{ route('birthday.clients') }}">
                                 <li
-                                    class="px-2 py-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.clients') || Route::is('birthday.clients') ? 'bg-indigo-200' : 'hidden' }}
-                                    birthday">
-                                    <i class="pr-2 fa-solid fa-users"></i>
+                                    class="px-2 py-2  hover:bg-indigo-50 hover:text-indigo-600 {{ Route::is('birthday.clients') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}
+                                    ">
+                                    <i class="mr-1 fa-solid fa-cake-candles"></i>
                                     Client Birthday
                                 </li>
                             </a>
@@ -134,7 +141,8 @@
                     </div>
                     @role('admin')
                         <a href="{{ route('admin.leaves') }}">
-                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                            <li
+                                class="{{ request()->routeIs('admin.leaves*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                                 <i class="pr-2 fa-solid fa-address-book"></i>
                                 All Leave
                             </li>
@@ -142,7 +150,8 @@
                     @endrole
                     @role('user')
                         <a href="{{ route('leaves.index') }}">
-                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                            <li
+                                class="{{ request()->routeIs('leaves*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                                 <i class="pr-2 fa-solid fa-envelope"></i>
                                 My Leave
                             </li>
@@ -150,21 +159,24 @@
                     @endrole
                     @role('admin')
                         <a href="{{ route('purposes.index') }}">
-                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                            <li
+                                class="{{ request()->routeIs('purposes*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                                 <i class="pr-2 fa-solid fa-bars"></i>
                                 Purpose
                             </li>
                         </a>
                     @endrole
                     <a href="{{ route('tasks.index') }}">
-                        <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                        <li
+                            class="{{ request()->routeIs('tasks*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                             <i class="pr-2 fa-solid fa-list-check"></i>
                             Tasks
                         </li>
                     </a>
                     @role('user')
                         <a href="{{ route('task.mytask') }}">
-                            <li class="px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
+                            <li
+                                class=" {{ request()->routeIs('task.mytask') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2 hover:bg-indigo-50 hover:text-indigo-600">
                                 <i class="pr-2 fa-solid fa-briefcase"></i>
                                 My Task
                             </li>
@@ -207,18 +219,20 @@
                     <a href="{{ route('tickets.index') }}">
                         <li
                             class="{{ request()->routeIs('tickets*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600">
-                            <i class="pr-2 fa-solid fa-gauge-high"></i>
+                            <i class="mr-1 fa-solid fa-ticket"></i>
                             Tickets
                         </li>
                     </a>
-                    <form action="{{ route('logout') }}" method="post">
-                        <button
-                            class="fixed bottom-0 py-2 my-2 text-white bg-indigo-500 rounded-md px-14 hover:bg-indigo-50 hover:text-indigo-600">
-                            @csrf
-                            <i class="pr-2 fa-solid fa-right-from-bracket"></i> <input type="submit" value="Logout">
-                        </button>
-                    </form>
                 </ul>
+            </div>
+            <div class="mx-auto h-[10vh]">
+                <form action="{{ route('logout') }}" method="post">
+                    <button
+                        class="py-2 mx-auto my-2 text-white bg-indigo-500 rounded-md px-14 hover:bg-indigo-50 hover:text-indigo-600">
+                        @csrf
+                        <i class="pr-2 fa-solid fa-right-from-bracket"></i> <input type="submit" value="Logout">
+                    </button>
+                </form>
             </div>
         </nav>
 
@@ -233,8 +247,9 @@
     @yield('js')
     <script>
         function birthdayToggle() {
-
             $(".birthday").toggleClass("hidden");
+            $('.down-icon').toggleClass('hidden');
+            $('.left-icon').toggleClass('hidden');
         }
     </script>
 </body>
