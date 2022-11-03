@@ -45,6 +45,9 @@
             <thead class="border-b">
                 <tr class="bg-indigo-600 ">
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
+                        SN.
+                    </th>
+                    <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
                         Name
                     </th>
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white border border-gray-200">
@@ -64,6 +67,9 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr class="border-b">
+                        <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
+                            {{ $loop->index + 1 }}
+                        </td>
                         <td class="text-sm font-medium text-gray-900 border border-gray-200 whitespace-nowrap">
                             {{ $user->name }}
                         </td>
