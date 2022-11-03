@@ -16,10 +16,7 @@ class IsActive
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->status == 'active') {
-            return $next($request);
-        } else {
-            return abort(403);
-        }
+        abort_if(auth()->user()->status != 'active', 403, "You are not allowed to login");
+        return $next($request);
     }
 }
