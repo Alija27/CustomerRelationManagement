@@ -56,6 +56,7 @@
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
                         Status
                     </th>
+
                     <th sope="col" class="px-6 py-4 text-sm font-medium text-white">
                         Action
                     </th>
@@ -91,10 +92,11 @@
 
                         <td class="text-sm font-medium whitespace-nowrap">
                             <div class="flex flex-row gap-2">
-                                <a href="{{ route('tasks.edit', $tasks) }}" class="mt-2"> <span
-                                        class="px-2 py-2 mr-2 text-white bg-blue-800 rounded"> <i
-                                            class="fa-solid fa-pen-to-square"></i> </span></a>
                                 @if (auth()->user()->role != 'user')
+                                    <a href="{{ route('tasks.edit', $tasks) }}" class="mt-2"> <span
+                                            class="px-2 py-2 mr-2 text-white bg-blue-800 rounded"> <i
+                                                class="fa-solid fa-pen-to-square"></i> </span></a>
+
                                     @if ($tasks->status === 'pending')
                                         <span onclick="show({{ $tasks->id }})"
                                             class="p-1 px-2 py-2 mr-2 text-white bg-red-800 rounded cursor-pointer"><i
