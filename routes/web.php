@@ -21,11 +21,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('alert', function () {
-    return view('alert');
-});
 
-Route::middleware(['auth', 'desk'])->group(function () {
+
+Route::middleware(['auth', 'desk', 'isActive'])->group(function () {
+
 
     Route::get("task/assignTask/{id}", [\App\Http\Controllers\TaskController::class, 'assignTask'])->name(('tasks.assignTask'));
     Route::delete('task/delete', [\App\Http\Controllers\TaskController::class, 'deleteTask'])->name(('tasks.delete'));
@@ -39,13 +38,16 @@ Route::middleware(['auth', 'desk'])->group(function () {
 
     Route::resource("incomes", \App\Http\Controllers\IncomeController::class);
     Route::get("income/total", [\App\Http\Controllers\IncomeController::class, 'calculateIncome'])->name("income.total");
+    Route::delete('income/delete', [\App\Http\Controllers\IncomeController::class, 'deleteIncome'])->name(('incomes.delete'));
 
     Route::resource("expenditures", \App\Http\Controllers\ExpenditureController::class);
 
     Route::get("admin/attendences", [\App\Http\Controllers\Admin\AttendenceController::class, "index"])->name('admin.attendence');
     Route::get("admin/attendences/{id}", [\App\Http\Controllers\Admin\AttendenceController::class, "show"])->name("admin.attendence.show");
+
+    Route::delete('expenditure/delete', [\App\Http\Controllers\ExpenditureController::class, 'deleteExpenditure'])->name(('expenditures.delete'));
 });
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin', 'isActive'])->group(function () {
 
 
     Route::resource("users", \App\Http\Controllers\UserController::class);
@@ -61,7 +63,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('purpose/delete', [\App\Http\Controllers\PurposeController::class, 'deletePurpose'])->name(('purposes.delete'));
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isActive'])->group(function () {
 
     Route::get('/dashboard', [SiteController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
@@ -73,7 +75,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource("airlines", \App\Http\Controllers\AirlineController::class);
-
+    Route::delete('leave/delete', [\App\Http\Controllers\LeaveController::class, 'deleteLeave'])->name(('leaves.delete'));
+    Route::get("attendences/monthly", [\App\Http\Controllers\AttendenceController::class, 'monthattendence'])->name('attendences.monthly');
 
     Route::resource("attendences", \App\Http\Controllers\AttendenceController::class);
 
