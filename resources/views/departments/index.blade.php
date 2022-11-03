@@ -35,7 +35,7 @@
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Departments</span>
             <a href="{{ route('departments.create') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    <i class="fa-solid fa-plus mt-1"></i> Add New
+                    <i class="mt-1 fa-solid fa-plus"></i> Add New
                 </button>
             </a>
         </div>
@@ -58,10 +58,10 @@
                             {{ $department->title }}
                         </td>
                         <td class="text-sm font-medium whitespace-nowrap">
-                            <a href="{{ route('departments.edit', $department) }}"> <span
+                            <a title="Edit" href="{{ route('departments.edit', $department) }}"> <span
                                     class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
                                         class="fa-solid fa-pen-to-square"></i> </span></a>
-                            <span onclick="show({{ $department->id }})"
+                            <span onclick="show({{ $department->id }})" title="Delete"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
 
