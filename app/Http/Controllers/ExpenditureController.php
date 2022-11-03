@@ -18,7 +18,8 @@ class ExpenditureController extends Controller
         $expenditures = Expenditure::all();
         $total = Expenditure::sum('amount');
         $today = Expenditure::where('date', Carbon::now())->sum('amount');
-        return view("expenditures.index", compact("expenditures", "total", "today"));
+        $monthly = Expenditure::whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->sum('amount');
+        return view("expenditures.index", compact("expenditures", "total", "today", "monthly"));
     }
 
     /**
@@ -68,7 +69,7 @@ class ExpenditureController extends Controller
      */
     public function edit(Expenditure $expenditure)
     {
-        return view("expenditure.edit", compact("expenditure"));
+        return view("expenditures.edit", compact("expenditure"));
     }
 
     /**
@@ -99,5 +100,12 @@ class ExpenditureController extends Controller
     public function destroy(Expenditure $expenditure)
     {
         //
+    }
+
+    public function deleteExpenditure(Request $request)
+    {
+        $expenditure = Expenditure::find($request->expenditure_id);
+        $expenditure->delete();
+        return redirect()->back();
     }
 }
