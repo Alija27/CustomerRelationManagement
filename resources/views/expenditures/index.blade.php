@@ -41,11 +41,30 @@
             </a>
 
         </div>
-        <div class="flex justify-between mb-6 border-b border-gray-200">
-            <div class="p-6 m-1 mx-4 my-4 shadow-md">
-                <div class="text-2xl font-bold">Total Expenditure</div>
-
-                <span class="mx-5 text-center ">{{ $total }}</span>
+        <div class="flex gap-10 m-2 mb-6">
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Total Expenditure</div>
+                    <div class="text-sm text-gray-600">Rs {{ $total }}</div>
+                </div>
+            </div>
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Today Expenditure</div>
+                    <div class="text-sm text-gray-600">Rs {{ $today }}</div>
+                </div>
+            </div>
+            <div class="flex w-6/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-3/12">
+                <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                        class="fa-solid fa-money-check-dollar"></i></span>
+                <div class="mx-4 mt-4 ">
+                    <div class="antialiased font-bold text-gray-600 md:text-sm ">Monthly Expenditure</div>
+                    <div class="text-sm text-gray-600">Rs {{ $monthly }}</div>
+                </div>
             </div>
 
 
@@ -113,10 +132,10 @@
                     Are You sure want to Delete?
                 </div>
                 <div class="flex justify-center mt-8 space-x-5">
-                    <form action="{{ route('users.delete') }}" method="post">
+                    <form action="{{ route('expenditures.delete') }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <input type="hidden" name="user_id" id="user_id">
+                        <input type="hidden" name="expenditure_id" id="expenditure_id">
                         <button class="p-2 px-6 text-white bg-green-600 rounded-md">Yes</button>
 
                     </form>
@@ -138,7 +157,7 @@
         });
 
         function show($id) {
-            document.getElementById('user_id').value = $id;
+            document.getElementById('expenditure_id').value = $id;
 
             $('#deleteModal').removeClass('hidden');
         }
