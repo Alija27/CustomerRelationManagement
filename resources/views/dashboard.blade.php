@@ -38,13 +38,25 @@
                                     class="fa-solid fa-arrow-left"><i
                                         class="m-1 fa-solid fa-stopwatch"></i></i>{{ $attendence?->clock_out ? 'Clocked Out' : 'Clock Out' }}</button>
                         @else
-                            {{-- @if ($attendence) --}}
-                            <form id="clockedout">
-
-                                <button class="p-2 px-6 ml-2 text-white bg-red-600 rounded hover:bg-red-700 "><i
+                            @if ($attendence)
+                                <form action="{{ route('attendences.update', $attendence?->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button
+                                        @if ($attendence?->clock_out !== null || $attendence?->clock_in == null) disabled  @if ($attendence?->clock_in != null) title="At {{ $attendence?->clock_out }}" @endif
+                                        @endif
+                                        class="@if ($attendence?->clock_out !== null || $attendence?->clock_in == null) cursor-not-allowed @endif p-2 px-6 ml-2 text-white bg-red-600 rounded hover:bg-red-700 "><i
+                                            class="fa-solid fa-arrow-left"><i
+                                                class="m-1 fa-solid fa-stopwatch"></i></i>{{ $attendence?->clock_out ? 'Clocked Out' : 'Clock Out' }}</button>
+                                </form>
+                            @else
+                                <button
+                                    @if ($attendence?->clock_out !== null || $attendence?->clock_in == null) disabled  @if ($attendence?->clock_in != null) title="At {{ $attendence?->clock_out }}" @endif
+                                    @endif
+                                    class="@if ($attendence?->clock_out !== null || $attendence?->clock_in == null) cursor-not-allowed @endif p-2 px-6 ml-2 text-white bg-red-600 rounded hover:bg-red-700 "><i
                                         class="fa-solid fa-arrow-left"><i
                                             class="m-1 fa-solid fa-stopwatch"></i></i>{{ $attendence?->clock_out ? 'Clocked Out' : 'Clock Out' }}</button>
-                            </form>
+                            @endif
                             {{-- @else
                             <button
                             class="p-2 px-6 ml-2 text-white bg-red-600 rounded cursor-not-allowed hover:bg-red-700"
@@ -54,14 +66,14 @@
                                 @endif --}}
                         @endif
                         {{-- @endif --}}
+                        @if (auth()->user()->role != 'admin')
+                            <a href="{{ route('leaves.create') }}">
+                                <button class="p-2 px-6 ml-2 text-white bg-yellow-600 rounded hover:bg-yellow-700"><i
+                                        class="m-1 fa-solid fa-envelope"></i>Ask
+                                    Leave</button>
+                            </a>
 
-                        <a href="{{ route('leaves.create') }}">
-                            <button class="p-2 px-6 ml-2 text-white bg-yellow-600 rounded hover:bg-yellow-700"><i
-                                    class="m-1 fa-solid fa-envelope"></i>Ask
-                                Leave</button>
-                        </a>
-
-
+                        @endif
                     </div>
                 </div>
                 <div class="grid grid-cols-1 flex-wrap gap-6 lg:gap-4 md:grid-cols-2 lg:grid-cols-3{{-- justify-center gap-6 m-6 mt-6 lg:flex-nowrap sm:flex-row lg:w-8/12 lg:justify-start lg:gap-4 --}}">
@@ -86,14 +98,17 @@
                             <div class="text-sm text-gray-600">{{ $leaves }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
-                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
-                                class="fa-regular fa-clipboard"></i></span>
-                        <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">This month attednednce</div>
-                            <div class="text-sm text-gray-600">{{ $this_month_attendence }}</div>
+                    <a href="{{ route('attendences.monthly') }}">
+                        <div
+                            class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                            <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                    class="fa-regular fa-clipboard"></i></span>
+                            <div class="mx-4 mt-4 ">
+                                <div class="antialiased font-bold text-gray-600 md:text-sm ">This month attednednce</div>
+                                <div class="text-sm text-gray-600">{{ $this_month_attendence }}</div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-cake-candles"></i></span>
@@ -197,7 +212,7 @@
                         @endif
                         <div class="flex flex-col  max-h-[200px] overflow-y-scroll scrollbar">
                             @foreach ($c_birthday as $user)
-                                <a href="{{ route('users.show', $user) }}">
+                                <a href="{{ route('clients.show', $user) }}">
                                     <div class="p-3 border-b">
                                         <div class="flex justify-between ">
                                             <div class="flex flex-row gap-2">
@@ -242,7 +257,7 @@
                     </div>
                     <div class="flex flex-col w-[49%] border border-gray-300 dashboard-card">
                         <div class="p-3 text-white bg-indigo-600 text-bold">
-                            Your Attendence Yearly Report
+                            Your Attendence Monthly Report
                         </div>
                         <div class="flex flex-col overflow-y-scroll scrollbar">
                             <div id="reportattedence"></div>
@@ -351,53 +366,54 @@
 
             var incomeexp = <?= json_encode($finalIncomeExpenditureReport) ?>;
             console.log(incomeexp);
-            Highcharts.chart('last7daysincomeexpenditure', {
-                title: {
-                    text: 'Income and Expenditure, Last 7 Days',
-                },
-                xAxis: {
-                    categories: incomeexp.days
-                },
-                yAxis: {
+            @if (auth()->user()->role != 'user')
+                Highcharts.chart('last7daysincomeexpenditure', {
                     title: {
-                        text: 'Income and expenditure'
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-                series: [{
-                        name: 'Income',
-                        data: incomeexp.incomes
+                        text: 'Income and Expenditure, Last 7 Days',
                     },
-                    {
-                        name: 'Expenditure',
-                        data: incomeexp.expenditures
-                    }
-                ],
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 500
-                        },
-                        chartOptions: {
-                            legend: {
-                                layout: 'horizontal',
-                                align: 'center',
-                                verticalAlign: 'bottom'
-                            }
+                    xAxis: {
+                        categories: incomeexp.days
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Income and expenditure'
                         }
-                    }]
-                }
-            });
-
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true
+                        }
+                    },
+                    series: [{
+                            name: 'Income',
+                            data: incomeexp.incomes
+                        },
+                        {
+                            name: 'Expenditure',
+                            data: incomeexp.expenditures
+                        }
+                    ],
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                });
+            @endif
 
             Highcharts.chart('taskstatuspiechart', {
                 chart: {
