@@ -69,10 +69,10 @@
                         </td>
                         @if (auth()->user()->role != 'user')
                             <td class="text-sm font-medium whitespace-nowrap">
-                                <a href="{{ route('airlines.edit', $airline) }}"> <span
+                                <a title="Edit" href="{{ route('airlines.edit', $airline) }}"> <span
                                         class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
                                             class="fa-solid fa-pen-to-square"></i> </span></a>
-                                <span onclick="show({{ $airline->id }})"
+                                <span title="Delete" onclick="show({{ $airline->id }})"
                                     class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                         class="fa-solid fa-trash"></i></a> </span>
 
