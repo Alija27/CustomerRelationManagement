@@ -100,12 +100,16 @@
                                         class="p-2 text-white bg-green-500 rounded-lg">Assign</button> </a>
                             </td>
                             <td class="text-sm font-medium whitespace-nowrap">
-                                <a href="{{ route('clients.edit', $client) }}"> <span
+                                <a title="Edit" href="{{ route('clients.edit', $client) }}"> <span
                                         class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
-                                            class="fa-solid fa-pen-to-square"></i> </span></a>
+                                            class="fa-solid fa-pen-to-square"></i> </span></a><a title="View"
+                                    href="{{ route('clients.show', $client) }}"> <span
+                                        class="p-1 px-2 mr-2 text-white bg-green-800 rounded"> <i
+                                            class="fa-solid fa-eye"></i> </span></a>
                                 <span onclick="show({{ $client->id }})"
-                                    class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
+                                    class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i title="Delete"
                                         class="fa-solid fa-trash"></i></a> </span>
+
 
                             </td>
                         @endif
