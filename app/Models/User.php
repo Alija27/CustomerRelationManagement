@@ -32,19 +32,24 @@ class User extends Authenticatable
         'exit_time',
     ];
 
-    public function Client()
+    public function client()
     {
         return $this->hasMany(Client::class);
     }
 
-    public function Leave()
+    public function leave()
     {
         return $this->hasMany(Leave::class);
     }
 
-    public function Attendence()
+    public function attendence()
     {
         return $this->hasMany(Attendence::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 
 
