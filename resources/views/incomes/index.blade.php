@@ -132,10 +132,10 @@
                     Are You sure want to Delete?
                 </div>
                 <div class="flex justify-center mt-8 space-x-5">
-                    <form action="{{ route('users.delete') }}" method="post">
+                    <form action="{{ route('incomes.delete') }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <input type="hidden" name="user_id" id="user_id">
+                        <input type="hidden" name="income_id" id="income_id">
                         <button class="p-2 px-6 text-white bg-green-600 rounded-md">Yes</button>
 
                     </form>
@@ -157,7 +157,7 @@
         });
 
         function show($id) {
-            document.getElementById('user_id').value = $id;
+            document.getElementById('income_id').value = $id;
 
             $('#deleteModal').removeClass('hidden');
         }
