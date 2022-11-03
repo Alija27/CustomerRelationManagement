@@ -61,7 +61,7 @@
             <tbody>
                 @foreach ($sorted as $user)
                     <tr
-                        class="border-b  @if (Carbon\Carbon::create($user->dob)->format('mm/dd') == Carbon\Carbon::now()->format('mm/dd')) bg-green-500 font-bold text-white @else text-gray-900 font-medium @endif">
+                        class="border-b  @if (Carbon\Carbon::create($user->dob)->format('mm/dd') == Carbon\Carbon::now()->format('mm/dd')) bg-red-500 font-bold  @else text-gray-900 font-medium @endif">
                         <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->name }}
                         </td>
