@@ -39,6 +39,9 @@
             <thead class="border-b">
                 <tr class="px-8 bg-indigo-600">
                     <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
+                        SN.
+                    </th>
+                    <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
                         Name
                     </th>
                     <th sope="col" class="px-2 py-4 text-sm font-medium text-white border border-gray-200">
@@ -62,6 +65,9 @@
                 @foreach ($sorted as $user)
                     <tr
                         class="border-b  @if (Carbon\Carbon::create($user->dob)->format('mm/dd') == Carbon\Carbon::now()->format('mm/dd')) bg-red-500 font-bold  @else text-gray-900 font-medium @endif">
+                        <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
+                            {{ $loop->index + 1 }}
+                        </td>
                         <td class="p-1 text-sm border border-gray-200 whitespace-nowrap">
                             {{ $user->name }}
                         </td>
