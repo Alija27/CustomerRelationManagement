@@ -5,7 +5,7 @@
             <span class="m-1 mx-4 my-4 text-2xl font-bold">Edit Task</span>
             <a href="{{ route('tasks.index') }}">
                 <button class="p-2 px-4 mx-4 my-4 text-white bg-indigo-600 rounded-lg">
-                    <- Go Back </button>
+                    <i class="mr-1 fa-solid fa-arrow-left"></i> Go Back </button>
             </a>
 
         </div>
@@ -75,7 +75,7 @@
 
 
             <div class="mb-6">
-                <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
+                <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Update</Button>
             </div>
         </form>
     </div>
