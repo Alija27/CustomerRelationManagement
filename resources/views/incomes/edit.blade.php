@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="mb-6">
-                <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Create</Button>
+                <Button class="p-2 px-4 text-white bg-indigo-600 rounded-xl">Update</Button>
             </div>
         </form>
     </div>
