@@ -17,13 +17,18 @@ class Client extends Model
         "dob",
     ];
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Ticket()
+    public function ticket()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function task()
+    {
+        return $this->hasMany(Task::class);
     }
 }
