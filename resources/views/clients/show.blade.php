@@ -37,6 +37,16 @@
                 <input class="w-full bg-gray-200 border border-gray-200" type="text" name="name" id="name"
                     disabled value={{ $client->dob }}>
             </div>
+            <div class="mb-6">
+                <label class="block font-bold text-gray-600 text-md">Added By</label>
+                <input class="w-full bg-gray-200 border border-gray-200" type="text" name="name" id="name"
+                    disabled value={{ $client->user->name }}>
+            </div>
+            <div class="mb-6">
+                <label class="block font-bold text-gray-600 text-md">Assigned To</label>
+                <input class="w-full bg-gray-200 border border-gray-200" type="text" name="name" id="name"
+                    disabled value={{ $client->assigned }}>
+            </div>
 
 
 
