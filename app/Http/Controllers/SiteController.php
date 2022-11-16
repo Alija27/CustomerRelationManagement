@@ -9,7 +9,9 @@ use App\Models\Leave;
 use App\Models\Client;
 use App\Models\Income;
 use App\Models\Ticket;
+use App\Models\Airline;
 use App\Models\Attendence;
+use App\Models\Department;
 use App\Models\Expenditure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,7 @@ class SiteController extends Controller
         $attendence = Attendence::whereDate('date', Carbon::today())->where('user_id', auth()->user()->id)->first();
         $attendences = Attendence::where('user_id', auth()->user()->id)->count();
         $leaves = Leave::where('user_id', auth()->user()->id)->count();
+        $today_leaves = Leave::where('date', Carbon::today())->count();
         $clients = Client::all()->count();
         $this_month_attendence = Attendence::where('user_id', Auth::id())->whereYear('date', Carbon::now()->year)->whereMonth('date', Carbon::now()->month)->count();
         $client_birthday_total = Client::whereMonth('dob', Carbon::now()->month)->whereDay('dob', '>=', Carbon::now()->day)->orderByRaw('DAYOFYEAR(dob)')->count();
@@ -103,6 +106,8 @@ class SiteController extends Controller
         ];
 
 
+
+
         // Pie chart
 
         $task_pending_count = Task::where("user_id", Auth::id())->where('status', '=', "pending")->count();
@@ -141,8 +146,10 @@ class SiteController extends Controller
         }
         $finalAttendenceReport = json_encode(collect($attendence_bar)->values());
         // dd($finalAttendenceReport);
-        return view('dashboard', compact("attendences", 'attendence', 'leaves', 'clients', 'this_month_attendence', 'client_birthday_total', 'user_birthday_total', 'today_ticket', 'upcomming_ticket', 'today_income', 'u_birthday', 'c_birthday', 'today_expenditure', 'finalIncomeExpenditureReport', 'finalTaskReport', 'finalAttendenceReport'));
+        
+        return view('dashboard', compact('attendences', 'today_leaves', 'attendence', 'leaves', 'clients', 'this_month_attendence', 'client_birthday_total', 'user_birthday_total', 'today_ticket', 'upcomming_ticket', 'today_income', 'u_birthday', 'c_birthday', 'today_expenditure', 'finalIncomeExpenditureReport', 'finalTaskReport', 'finalAttendenceReport'));
     }
+
 
 
     public function birthday()
