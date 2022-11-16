@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -17,6 +18,14 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
+        foreach ($clients as $client) {
+            $task = Task::where('client_id', $client->id)->latest()->first();
+            if ($task == null) {
+                $client->assigned = "-";
+            } else {
+                $client->assigned = $task->user->name;
+            }
+        }
         return view("clients.index", compact('clients'));
     }
 
@@ -60,6 +69,10 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+
+        $task = Task::where('client_id', $client->id)->latest()->first();
+        $client->assigned = $task->user->name;
+
         return view("clients.show", compact("client"));
     }
 
