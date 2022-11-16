@@ -82,6 +82,11 @@
 
 
                 </select>
+                <div class="text-red-700 ">
+                    @error('role')
+                        {{ $message }}
+                    @enderror
+                </div>
 
                 {{-- <input  class="w-11/12 border border-gray-200" type="text" name="role" id="role" value="{{$user->role}}"> --}}
             </div>
@@ -89,6 +94,11 @@
                 <label class="block font-bold text-gray-600 text-md">Date Of Birth</label>
                 <input class="w-full border border-gray-200" type="date" name="dob" id="dob"
                     value="{{ old('dob') ?? $user->dob }}">
+                <div class="text-red-700 ">
+                    @error('dob')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
 
             <div class="mb-6">
