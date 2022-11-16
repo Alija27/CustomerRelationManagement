@@ -90,21 +90,35 @@
                             <div class="text-sm text-gray-600">{{ $attendences }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
-                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
-                                class="fa-regular fa-envelope"></i></span>
-                        <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm">Total Leave</div>
-                            <div class="text-sm text-gray-600">{{ $leaves }}</div>
+                    @if (auth()->user()->role == 'user' || auth()->user()->role == 'desk')
+                        <div
+                            class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                            <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                    class="fa-regular fa-envelope"></i></span>
+                            <div class="mx-4 mt-4 ">
+                                <div class="antialiased font-bold text-gray-600 md:text-sm">Total Leave</div>
+                                <div class="text-sm text-gray-600">{{ $leaves }}</div>
+                            </div>
                         </div>
-                    </div>
+                    @endif
+                    @role('admin')
+                        <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                            <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                    class="fa-solid fa-clipboard-user"></i></span>
+                            <div class="mx-4 mt-4 ">
+                                <div class="antialiased font-bold text-gray-600 md:text-sm">Today Leaves</div>
+                                <div class="text-sm text-gray-600"> {{ $today_leaves }}</div>
+                            </div>
+                        </div>
+                    @endrole
                     <a href="{{ route('attendences.monthly') }}">
                         <div
                             class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                             <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                     class="fa-regular fa-clipboard"></i></span>
                             <div class="mx-4 mt-4 ">
-                                <div class="antialiased font-bold text-gray-600 md:text-sm ">This month attednednce</div>
+                                <div class="antialiased font-bold text-gray-600 md:text-sm ">This month attednednce
+                                </div>
                                 <div class="text-sm text-gray-600">{{ $this_month_attendence }}</div>
                             </div>
                         </div>
@@ -113,7 +127,8 @@
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-cake-candles"></i></span>
                         <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Upcomming Client birthdays</div>
+                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Upcomming Client birthdays
+                            </div>
                             <div class="text-sm text-gray-600">{{ $client_birthday_total }}</div>
                         </div>
                     </div>
@@ -142,22 +157,26 @@
                             <div class="text-sm text-gray-600">{{ $upcomming_ticket }}</div>
                         </div>
                     </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
-                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
-                                class="fa-solid fa-money-check-dollar"></i></span>
-                        <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Income</div>
-                            <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
+                    @if (auth()->user()->role == 'admin' && auth()->user()->role == 'desk')
+                        <div
+                            class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                            <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                    class="fa-solid fa-money-check-dollar"></i></span>
+                            <div class="mx-4 mt-4 ">
+                                <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Income</div>
+                                <div class="text-sm text-gray-600">Rs {{ $today_income }}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
-                        <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
-                                class="fa-solid fa-coins"></i></span>
-                        <div class="mx-4 mt-4 ">
-                            <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Expenditure</div>
-                            <div class="text-sm text-gray-600">Rs {{ $today_expenditure }}</div>
+                        <div
+                            class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                            <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
+                                    class="fa-solid fa-coins"></i></span>
+                            <div class="mx-4 mt-4 ">
+                                <div class="antialiased font-bold text-gray-600 md:text-sm ">Todays Expenditure</div>
+                                <div class="text-sm text-gray-600">Rs {{ $today_expenditure }}</div>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="flex flex-wrap mt-4 gap-y-8 gap-x-2">
                     <div class="flex flex-col w-[49%] border border-gray-300 dashboard-card">
