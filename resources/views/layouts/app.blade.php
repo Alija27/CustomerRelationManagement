@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Crm') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -223,6 +223,15 @@
                             Tickets
                         </li>
                     </a>
+                    @role('admin')
+                    <a href="{{ route('admin.payments.index') }}">
+                        <li
+                            class="px-2 py-2  {{ request()->routeIs('admin.payments*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}  hover:bg-indigo-50 hover:text-indigo-600">
+                            <i class="pr-2 fa-solid fa-users"></i>
+                            Payments
+                        </li>
+                    </a>
+                @endrole
                 </ul>
             </div>
             <div class="mx-auto h-[10vh]">
