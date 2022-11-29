@@ -52,9 +52,8 @@ class PaymentController extends Controller
         
         $payment["net_pay"]=$request->salary-$request->deduction_amount+$request->incentive_pay-(((($request->salary)-($request->deduction_amount))*($request->tax))/100);
         
-        Payment::create($payment);
-        
-        return redirect()->route("admin.payments.show",$request->user_id)->with("success","Payment created successfully");
+        $payment = Payment::create($payment);
+        return redirect()->route("admin.payments.viewpayment",$payment->id)->with("success","Payment created successfully");
        
     }
 
@@ -126,5 +125,11 @@ class PaymentController extends Controller
         $payment->delete();
         return redirect()->back()->with("success","Payment deleted succesfully");
 
+    }
+
+    public function viewPayment($id){
+        $payment=Payment::find($id);
+        return view("admin.payments.show",compact("payment"));
+        
     }
 }
