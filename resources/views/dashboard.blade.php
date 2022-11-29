@@ -82,14 +82,14 @@
                     </div> --}}
 
 
-                    <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
+                    {{-- <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-clipboard-user"></i></span>
                         <div class="mx-4 mt-4 ">
                             <div class="antialiased font-bold text-gray-600 md:text-sm">Total Attendence</div>
                             <div class="text-sm text-gray-600">{{ $attendences }}</div>
                         </div>
-                    </div>
+                    </div> --}}
                     @if (auth()->user()->role == 'user' || auth()->user()->role == 'desk')
                         <div
                             class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
