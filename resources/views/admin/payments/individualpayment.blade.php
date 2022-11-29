@@ -112,6 +112,11 @@
                             <span title="Delete" onclick="show({{ $payment->id }})"
                                 class="p-1 px-2 mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
+                                    <a title="View & Print" href="{{ route('admin.payments.viewpayment', $payment) }}">
+                                    <span
+                                        class="p-1 px-2 mr-2 text-white bg-green-800 rounded cursor-pointer">
+                                        <i class="fa-solid fa-eye"></i> </span>
+                                    </a>
                         </td>
 
 
@@ -142,6 +147,10 @@
             </div>
         </div>
     </div>
+    
+   {{--  <div id="myDiv">
+My name is Alija Ghimire
+    </div> --}}
     </div>
     
 @endsection
@@ -165,5 +174,16 @@
         function hide() {
             $('#deleteModal').addClass('hidden');
         }
+
+        function PrintDiv(myDiv) {
+    var headstr = "<html><head><title>Booking Details</title></head><body>";
+    var footstr = "</body>";
+    var newstr = document.getElementById(myDiv).innerHTML;
+    var oldstr = document.body.innerHTML;
+    document.body.innerHTML = headstr+newstr+footstr;
+    window.print();
+    document.body.innerHTML = oldstr;
+    return false;
+}
     </script>
 @endsection
