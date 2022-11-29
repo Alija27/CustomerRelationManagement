@@ -223,11 +223,20 @@
                             Tickets
                         </li>
                     </a>
+                    @if(Auth::user()->role !== "admin")
+                    <a href="{{ route('payments.index') }}">
+                        <li
+                            class="{{ request()->routeIs('payments*') ? 'bg-indigo-50 text-indigo-600  border-r-4 border-indigo-600' : '' }} px-2 py-2 my-2  hover:bg-indigo-50 hover:text-indigo-600 ">
+                            <i class="pr-2 fa-solid fa-dollar-sign"></i>
+                            My Payment
+                        </li>
+                    </a>
+                    @endif
                     @role('admin')
                     <a href="{{ route('admin.payments.index') }}">
                         <li
                             class="px-2 py-2  {{ request()->routeIs('admin.payments*') ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600' : '' }}  hover:bg-indigo-50 hover:text-indigo-600">
-                            <i class="pr-2 fa-solid fa-users"></i>
+                            <i class="pr-2 fa-solid fa-dollar-sign"></i>
                             Payments
                         </li>
                     </a>
