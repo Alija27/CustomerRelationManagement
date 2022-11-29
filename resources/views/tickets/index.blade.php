@@ -148,7 +148,7 @@
                                     class="p-1 px-2 mr-2 text-white bg-blue-800 rounded"> <i
                                         class="fa-solid fa-pen-to-square"></i> </span></a>
                             <span title="Delete" onclick="show({{ $ticket->id }})"
-                                class="p-1 px-2 abc mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
+                                class="p-1 px-2  mr-2 text-white bg-red-800 rounded cursor-pointer"> <i
                                     class="fa-solid fa-trash"></i></a> </span>
 
 
