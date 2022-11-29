@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\SiteController;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Attendence;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,13 @@ Route::middleware(['auth', 'admin', 'isActive'])->group(function () {
 
     Route::resource("purposes", \App\Http\Controllers\PurposeController::class);
     Route::delete('purpose/delete', [\App\Http\Controllers\PurposeController::class, 'deletePurpose'])->name(('purposes.delete'));
+    Route::get("admin/payments/users",[ \App\Http\Controllers\Admin\PaymentController::class,'index'])->name('admin.payments.index');
+    Route::get("admin/payments/create",[ \App\Http\Controllers\Admin\PaymentController::class,'create'])->name('admin.payments.create');
+    Route::get("admin/payments/users/{id}",[ \App\Http\Controllers\Admin\PaymentController::class,'show'])->name('admin.payments.show');
+    Route::post("admin/payments/store",[ \App\Http\Controllers\Admin\PaymentController::class,'store'])->name('admin.payments.store');
+    Route::get("admin/payments/{id}/edit",[ \App\Http\Controllers\Admin\PaymentController::class,'edit'])->name('admin.payments.edit');
+    Route::put("admin/payments/{id}",[ \App\Http\Controllers\Admin\PaymentController::class,'update'])->name('admin.payments.update');
+    Route::delete("admin/payments/delete",[ \App\Http\Controllers\Admin\PaymentController::class,'deletePayment'])->name('admin.payments.delete');
 });
 
 Route::middleware(['auth', 'isActive'])->group(function () {
@@ -77,6 +85,7 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::resource("airlines", \App\Http\Controllers\AirlineController::class);
     Route::delete('leave/delete', [\App\Http\Controllers\LeaveController::class, 'deleteLeave'])->name(('leaves.delete'));
     Route::get("attendences/monthly", [\App\Http\Controllers\AttendenceController::class, 'monthattendence'])->name('attendences.monthly');
+    Route::get("payments",[\App\Http\Controllers\PaymentController::class,'index'])->name('payments.index');
 
     Route::resource("attendences", \App\Http\Controllers\AttendenceController::class);
 
