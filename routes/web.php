@@ -68,7 +68,8 @@ Route::middleware(['auth', 'admin', 'isActive'])->group(function () {
     Route::post("admin/payments/store",[ \App\Http\Controllers\Admin\PaymentController::class,'store'])->name('admin.payments.store');
     Route::get("admin/payments/{id}/edit",[ \App\Http\Controllers\Admin\PaymentController::class,'edit'])->name('admin.payments.edit');
     Route::put("admin/payments/{id}",[ \App\Http\Controllers\Admin\PaymentController::class,'update'])->name('admin.payments.update');
-    Route::delete("admin/payments/delete",[ \App\Http\Controllers\Admin\PaymentController::class,'deletePayment'])->name('admin.payments.delete');
+    Route::delete("admin/payments/delete",[ \App\Http\Controllers\Admin\PaymentController::class,'deletePayment'])->name('admin.payments.delete'); 
+    Route::get("admin/payments/{id}",[\App\Http\Controllers\Admin\PaymentController::class,'viewPayment'])->name('admin.payments.viewpayment');
 });
 
 Route::middleware(['auth', 'isActive'])->group(function () {
