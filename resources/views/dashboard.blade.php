@@ -140,7 +140,7 @@
                             <div class="text-sm text-gray-600">{{ $user_birthday_total }}</div>
                         </div>
                     </div>
-
+                    <a href="{{ route('ticket.today') }}">
                     <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-ticket"></i></span>
@@ -149,6 +149,7 @@
                             <div class="text-sm text-gray-600">{{ $today_ticket }}</div>
                         </div>
                     </div>
+                </a>
                     <div class="flex w-11/12 h-20 p-2 bg-white border-red-100 rounded-md shadow-xl md:w-full lg:w-full ">
                         <span class="items-center px-5 py-5 text-white bg-indigo-600 rounded-md"><i
                                 class="fa-solid fa-ticket-simple"></i></span>
