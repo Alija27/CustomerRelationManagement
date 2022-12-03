@@ -175,15 +175,6 @@ My name is Alija Ghimire
             $('#deleteModal').addClass('hidden');
         }
 
-        function PrintDiv(myDiv) {
-    var headstr = "<html><head><title>Booking Details</title></head><body>";
-    var footstr = "</body>";
-    var newstr = document.getElementById(myDiv).innerHTML;
-    var oldstr = document.body.innerHTML;
-    document.body.innerHTML = headstr+newstr+footstr;
-    window.print();
-    document.body.innerHTML = oldstr;
-    return false;
-}
+        
     </script>
 @endsection
